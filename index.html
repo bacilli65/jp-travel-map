@@ -420,7 +420,7 @@ const DAYS = [
         detail:{
           addr:"關西國際機場 第一航廈",
           text:["長榮 BR132 直飛大阪，飛行時間 2h40m。建議 06:30 抵達桃園機場。","通關、領行李預估 45–60 分鐘。建議先在機場購買/充值 ICOCA 卡。","搭乘南海電鐵 Rapi:t 到難波站（約 38 分鐘，¥1,290）。"],
-          tips:["訂位代號：Chenyang F2T4UV ｜ Kwohsiung F2PDUV ｜ Shufen F2RD6N"],
+          tips:["訂位代號：Chenyang ****** ｜ Kwohsiung ****** ｜ Shufen ******"],
           backup:"若 Rapi:t 客滿，可搭南海空港急行（約 45 分鐘，¥930）",
           rapit:{
             buyUrl:"https://plate.id/LpuETUB7",
@@ -465,7 +465,7 @@ const DAYS = [
         detail:{
           addr:"大阪府大阪市中央區難波",
           walk:"南海難波站 24號出口步行約 3 分鐘",
-          text:["入住時間 15:00 起。可先寄放行李，稍作休息後出發。","單人房 #5252876 + 雙人房 #5252874","包含免費早餐。"]
+          text:["入住時間 15:00 起。可先寄放行李，稍作休息後出發。","單人房 #*** + 雙人房 #***","包含免費早餐。"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
           detail:"往東北方向→穿過千日前通→進入道頓堀商店街",
@@ -522,9 +522,9 @@ const DAYS = [
       ["近鐵難波→奈良 ×3人","¥2,040"],
       ["鹿仙貝 ×3份","¥600"],
       ["東大寺入場 ×3人","¥1,800"],
-      ["志津香午餐 ×3人","¥4,000–5,400"],
+      ["うな菊鰻魚午餐 ×3人","¥10,500–19,500"],
       ["三笠旅館住宿（含晚餐早餐·2晚）","¥159,900"],
-      ["小計 (3人)","¥168,340–169,740"]
+      ["小計 (3人)","¥174,840–183,840"]
     ],
     stops: [
       { time:"08:30", zh:"難波站 出發", en:"Depart Namba", lat:34.6656, lng:135.5013,
@@ -571,18 +571,18 @@ const DAYS = [
           tips:["🪑 長輩可在鏡池畔旁的長椅休息。園內設有無障礙步道。"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"從南大門往西走→志津香在東大寺西側",
-          duration:"步行 5 分鐘 (350m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"12:00", zh:"午餐：志津香 釜飯", en:"Lunch: Shizuka Kamameshi", lat:34.6870, lng:135.8370,
-        desc:"奈良名物釜飯老舖。建議11:30前排隊。¥1,500–2,500/人", type:"meal",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%BF%97%E6%B4%A5%E9%A6%99+%E9%87%9C%E9%A3%AF+Shizuka+Nara",
+          detail:"從東大寺南大門往西南走→經奈良公園→興福寺旁",
+          duration:"步行 12 分鐘 (800m)", cost:"", modeClass:"t-mode-walk" }},
+      { time:"12:00", zh:"午餐：うな菊 奈良本店", en:"Lunch: Unagiku Nara Honten (Unagi)", lat:34.6804, lng:135.8365,
+        desc:"菊水樓別館·130年醬汁傳承·正統江戶前鰻魚。建議預約。¥3,500–6,500/人", type:"meal",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E3%81%86%E3%81%AA%E8%8F%8A+%E5%A5%88%E8%89%AF%E6%9C%AC%E5%BA%97+Unagiku+Nara",
         detail:{
-          addr:"59-11 Noboriojicho, Nara, 630-8213",
-          walk:"從東大寺步行約 5 分鐘",
-          text:["奈良名物釜飯名店。口味熱騰騰的釜飯，每鍋現做，約等 20–30 分鐘。","預算：約 ¥1,300–1,800/人"],
-          tips:["⏰ 排隊名店！強烈建議 11:30 前到場取號（開店 11:00）。櫻花季假日排隊可達 40–60 分鐘，平日約 20–30 分鐘。提前取號後可在附近散步等叫號。","🪑 店內有桌椅座位，長輩膝蓋友善。"],
+          addr:"1130 Takabatake-cho, Nara, 630-8301",
+          walk:"從東大寺步行約 12 分鐘（經奈良公園往西南→興福寺旁）",
+          text:["菊水樓別館改裝的正統江戶前鰻魚專門店，130年歷史醬汁傳承。","使用國產活鰻，搭配新潟魚沼越光米。傳統和室建築，適合長輩。","建議預約（可線上預約）。推薦：うな重（鰻魚重）。","預算約¥3,500–6,500/人","線上預約：https://booking.ebica.jp/webrsv/search/e014091301/27122"],
+          tips:["⏰ 強烈建議線上預約 11:30–12:00 時段，免排隊直接入座。未預約則建議 11:30 前到場，午餐尖峰 12:00–13:00 等候可達 30–45 分鐘。","🪑 傳統和室建築，有桌椅及榻榻米座位，長輩友善。"],
           alts:[
-            {n:"うな菊 鰻魚飯",e:"Unagiku (Eel)",c:"鰻魚料理（130年老舖） ｜ ¥2,500–6,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E3%81%86%E3%81%AA%E8%8F%8A+%E5%A5%88%E8%89%AF"},
+            {n:"志津香 釜飯 公園店",e:"Shizuka Kamameshi (Nara speciality)",c:"奈良名物釜飯老舖 ｜ ¥1,300–1,800/人｜每鍋現做·建議11:30前取號（櫻花季排隊40–60分鐘）",u:"https://www.google.com/maps/search/?api=1&query=%E5%BF%97%E6%B4%A5%E9%A6%99+%E9%87%9C%E9%A3%AF+Shizuka+Nara"},
             {n:"天極堂 奈良本店",e:"Tengyokudo (Kuzu Arrowroot)",c:"葛粉料理·奈良名物 ｜ ¥2,000–3,500/人",u:"https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E6%A5%B5%E5%A0%82+%E5%A5%88%E8%89%AF%E6%9C%AC%E5%BA%97"},
             {n:"ゐざさ茶屋 東大寺前",e:"Izasa Chaya (Persimmon Leaf Sushi)",c:"柿葉壽司·素麵 ｜ ¥2,500–4,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E3%82%90%E3%81%96%E3%81%95%E8%8C%B6%E5%B1%8B+%E6%9D%B1%E5%A4%A7%E5%AF%BA+Nara"}
           ]
@@ -608,7 +608,7 @@ const DAYS = [
         detail:{
           addr:"728-10 Kawakamicho, Nara-shi, 630-8202",
           walk:"接駁車約 15 分鐘到旅館",
-          text:["返回近鐵奈良站搭 14:45 接駁車（或 16:00 班次）。","入住後享受溫泉、觀景，然後用「萬葉會席」晚餐。","含彩色浴衣租借特典。","訂單 #21315093105695"],
+          text:["返回近鐵奈良站搭 14:45 接駁車（或 16:00 班次）。","入住後享受溫泉、觀景，然後用「萬葉會席」晚餐。","含彩色浴衣租借特典。","訂單 #***"],
           tips:["若長輩較累，可在站前休息等候，或搭計程車（約¥2,000）。"]
         }},
       { time:"18:00", zh:"旅館懷石晚餐", en:"Kaiseki Dinner", lat:34.6833, lng:135.8520,
@@ -750,7 +750,7 @@ const DAYS = [
         detail:{
           addr:"KOKO HOTEL Osaka Namba Sennichimae",
           walk:"從難波站步行約 8 分鐘",
-          text:["前往 KOKO HOTEL Osaka Namba Sennichimae，先寄放行李。","15:00 後辦理入住。飯店距離日本橋站、黑門市場極近。","訂單 #5651138861　PIN: 2636"]
+          text:["前往 KOKO HOTEL Osaka Namba Sennichimae，先寄放行李。","15:00 後辦理入住。飯店距離日本橋站、黑門市場極近。","訂單 #***　PIN: ****"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
           detail:"從飯店沿千日前通往東→右轉進入黑門市場",
