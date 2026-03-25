@@ -99,10 +99,10 @@
   .detail-btn{
     display:inline-flex;align-items:center;gap:4px;margin-top:8px;
     padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;
-    background:#E65100;color:#fff;border:1px solid #BF360C;cursor:pointer;
-    min-height:32px;transition:background .15s;text-shadow:0 1px 2px rgba(0,0,0,.2);
+    background:#8B6914;color:#fff;border:1px solid #7a5c10;cursor:pointer;
+    min-height:32px;transition:background .15s;
   }
-  .detail-btn:active{background:#BF360C;}
+  .detail-btn:active{background:#6d5310;}
 
   /* ── TRANSPORT CONNECTOR ── */
   .transport-con{
@@ -170,9 +170,9 @@
     border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;
     min-height:36px;cursor:pointer;
   }
-  .p-btn-maps{background:#2979FF;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.2);}
-  .p-btn-nav{background:#00C853;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.2);}
-  .p-btn-detail{background:#E65100;color:#fff;border:none;font-family:inherit;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.2);}
+  .p-btn-maps{background:#1a65d6;color:#fff;font-weight:700;}
+  .p-btn-nav{background:#1d7d3a;color:#fff;font-weight:700;}
+  .p-btn-detail{background:#8B6914;color:#fff;border:none;font-family:inherit;font-weight:700;}
   .p-btn-maps:active,.p-btn-nav:active,.p-btn-detail:active{opacity:.8;}
 
   /* ── LEGEND OVERLAY ── */
@@ -193,45 +193,6 @@
     border:none;border-radius:10px;background:#f0ebe5;
     font-size:14px;font-weight:600;cursor:pointer;min-height:44px;
   }
-
-  /* ── TRIP INFO OVERLAY ── */
-  .info-overlay{
-    position:absolute;inset:0;z-index:2500;
-    background:#fff;
-    display:flex;flex-direction:column;
-    transform:translateY(100%);
-    transition:transform .35s cubic-bezier(.4,0,.2,1);
-    will-change:transform;
-  }
-  .info-overlay.show{transform:translateY(0);}
-  .info-overlay .info-header{
-    padding:env(safe-area-inset-top,10px) 14px 12px;
-    border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px;
-    flex-shrink:0;background:linear-gradient(135deg,#1B2A4A,#2d4470);
-  }
-  .info-overlay .info-back{
-    width:40px;height:40px;border-radius:50%;border:none;
-    background:rgba(255,255,255,.2);font-size:20px;cursor:pointer;color:#fff;
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  }
-  .info-overlay .info-back:active{background:rgba(255,255,255,.3);}
-  .info-overlay .info-title{flex:1;min-width:0;}
-  .info-overlay .info-title h3{font-size:16px;font-weight:700;color:#fff;}
-  .info-overlay .info-title .info-sub{font-size:11px;color:rgba(255,255,255,.7);}
-  .info-overlay .info-body{
-    overflow-y:auto;flex:1;padding:0 0 env(safe-area-inset-bottom,16px);
-    -webkit-overflow-scrolling:touch;
-  }
-  .info-section{padding:16px;border-bottom:1px solid #f0ebe5;}
-  .info-section-title{font-size:14px;font-weight:700;color:#1B2A4A;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
-  .info-card{background:#faf8f4;border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid #f0ebe5;font-size:13px;line-height:1.7;color:#333;}
-  .info-card .ic-label{font-weight:700;color:#1B2A4A;margin-bottom:4px;}
-  .info-card ul{margin:4px 0 0 16px;padding:0;}
-  .info-card li{margin-bottom:3px;}
-  .budget-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f0ebe5;font-size:13px;}
-  .budget-row:last-child{border-bottom:none;font-weight:700;color:#C9A96E;border-top:2px solid #C9A96E;padding-top:8px;}
-  .budget-row .br-item{color:#555;}
-  .budget-row .br-cost{font-weight:600;white-space:nowrap;}
 
   /* ════════════════════════════════════════ */
   /* ── DETAIL PANEL (full itinerary view) ── */
@@ -323,8 +284,8 @@
     text-decoration:none;min-height:48px;border:none;cursor:pointer;
     font-family:inherit;
   }
-  .dt-btn-maps{background:#2979FF;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.2);}
-  .dt-btn-nav{background:#00C853;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.2);}
+  .dt-btn-maps{background:#1a65d6;color:#fff;font-weight:700;}
+  .dt-btn-nav{background:#1d7d3a;color:#fff;font-weight:700;}
   .dt-btn-maps:active,.dt-btn-nav:active{opacity:.8;}
 
   /* ── DESKTOP SIDEBAR ── */
@@ -367,7 +328,6 @@
     .day-tabs{display:none!important;}
     #gpsBtn{bottom:30px;}
     #navBtn{bottom:90px;}
-    #infoBtn{bottom:90px!important;}
     #legendBtn{bottom:30px;}
   }
   @media(max-width:768px){
@@ -426,7 +386,6 @@
 <!-- MAP BUTTONS -->
 <button class="map-btn" id="gpsBtn" title="我的位置">📍</button>
 <button class="map-btn" id="navBtn" title="Google Maps 導航至下一站">🧭</button>
-<button class="map-btn" id="infoBtn" title="行程總覽" style="left:14px;bottom:140px;">📋</button>
 <button class="map-btn" id="legendBtn" title="圖例">ℹ️</button>
 
 <!-- LEGEND OVERLAY -->
@@ -435,167 +394,6 @@
     <h3>圖例 Legend</h3>
     <div id="legendContent"></div>
     <button class="legend-close" onclick="document.getElementById('legendOverlay').classList.remove('show')">關閉</button>
-  </div>
-</div>
-
-<!-- TRIP INFO OVERLAY -->
-<div class="info-overlay" id="infoOverlay">
-  <div class="info-header">
-    <button class="info-back" onclick="document.getElementById('infoOverlay').classList.remove('show')">←</button>
-    <div class="info-title">
-      <h3>奈良·大阪 行程總覽</h3>
-      <div class="info-sub">April 8–13, 2026 · 6天5夜 · 3位旅伴</div>
-    </div>
-  </div>
-  <div class="info-body">
-    <!-- Sakura Notes -->
-    <div class="info-section">
-      <div class="info-section-title">🌸 櫻花情報 Sakura Notes</div>
-      <div class="info-card">
-        <p>2026年大阪櫻花預計3月23日開花、3月31日滿開。行程日期（4/8–13）屬於花望後期至葉櫻時期，仍可見晚開品種及花瓣雨。</p>
-        <p style="margin-top:6px">若草山山腰櫻花比市區晚開約 3–5 日，4月9–10日正是最佳觀賞時機。</p>
-      </div>
-      <div class="info-card">
-        <div class="ic-label">推薦少人賞櫻點</div>
-        <ul>
-          <li><strong>佐保川（奈良）</strong>— 7km 櫻花隧道，1,700株染井吉野櫻，人少清幽</li>
-          <li><strong>元興寺（奈良町）</strong>— 隱密古寺櫻花，人潮少，汛靜優雅</li>
-          <li><strong>大阪造幣局櫻花通抵</strong>— 每年4月中旬開放一週，晚開品種為主</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Weather & Packing -->
-    <div class="info-section">
-      <div class="info-section-title">🌤️ 天氣與穿著 Weather & Packing</div>
-      <div class="info-card">
-        <div class="ic-label">4月8–13日 大阪·奈良天氣預測</div>
-        <ul>
-          <li>日間最高：16–22°C (61–72°F)</li>
-          <li>夜間最低：7–12°C (45–54°F)</li>
-          <li>降雨機率：約 30–40%，建議攜帶摺疊雨具</li>
-          <li>奈良山區比大阪低 1–3°C，早晚偏涼</li>
-        </ul>
-      </div>
-      <div class="info-card">
-        <div class="ic-label">穿著建議</div>
-        <ul>
-          <li>薄外套/開襟衫（早晚必備）+ 薄毛衣</li>
-          <li>舒適步行鞋（奈良石板路/若草山草地必要）</li>
-          <li>摺疊雨具 + 雨傘 + 防曬用品</li>
-          <li>溫泉旅館會提供浴衣（含彩色浴衣租借特典）</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Flight Info -->
-    <div class="info-section">
-      <div class="info-section-title">✈️ 航班資訊 Flight Details</div>
-      <div class="info-card">
-        <div class="ic-label">去程</div>
-        <p>BR132 台北桃園 TPE (T2) → 大阪關西 KIX (T1)</p>
-        <p style="color:#C9A96E;font-weight:700">08:30 → 12:10（飛行 2h40m）</p>
-      </div>
-      <div class="info-card">
-        <div class="ic-label">回程</div>
-        <p>BR177 大阪關西 KIX (T1) → 台北桃園 TPE (T2)</p>
-        <p style="color:#C9A96E;font-weight:700">11:10 → 13:05（飛行 2h55m）</p>
-      </div>
-    </div>
-
-    <!-- Accommodation Overview -->
-    <div class="info-section">
-      <div class="info-section-title">🏨 住宿總覽 Accommodation</div>
-      <div class="info-card">
-        <div class="ic-label">4/8 東橫INN大阪難波</div>
-        <p>大阪難波站附近，含免費早餐</p>
-      </div>
-      <div class="info-card">
-        <div class="ic-label">4/9–4/11 奈良三笠日式旅館（2晚）</div>
-        <p>月之棟和室10疊 · 含懷石晚餐+早餐 · 含溫泉</p>
-      </div>
-      <div class="info-card">
-        <div class="ic-label">4/11–4/13 KOKO HOTEL Osaka Namba Sennichimae（2晚）</div>
-        <p>難波千日前，步行3分鐘到黑門市場</p>
-      </div>
-    </div>
-
-    <!-- Confirmed Dining -->
-    <div class="info-section">
-      <div class="info-section-title">🍽️ 已預約/推薦餐廳 Dining Highlights</div>
-      <div class="info-card">
-        <div class="ic-label">4/10 12:00 うな菊 奈良本店</div>
-        <p>菊水樓別館·130年歷史醬汁傳承·正統江戶前鰻魚 · 建議預約</p>
-      </div>
-      <div class="info-card">
-        <div class="ic-label">4/11 17:30 敘敘苑燒肉 Jojoen</div>
-        <p>高級和牛燒肉 · 建議提前電話預約</p>
-      </div>
-      <div class="info-card">
-        <div class="ic-label">4/12 18:00 寿司はせ川 心斎橋本店</div>
-        <p>告別晚宴 · 職人Omakase握壽司 · 建議預約</p>
-      </div>
-      <div class="info-card" style="font-size:12px;color:#888">※ 每餐皆附鄰近替代選擇，詳見各日行程「詳情」</div>
-    </div>
-
-    <!-- Total Budget -->
-    <div class="info-section">
-      <div class="info-section-title">📊 全程預算總覽 Total Budget</div>
-      <div style="background:#faf8f4;border-radius:10px;padding:12px 14px;border:1px solid #f0ebe5;">
-        <div class="budget-row"><span class="br-item">✈️ 機票（3人）</span><span class="br-cost">TWD 46,611</span></div>
-        <div class="budget-row"><span class="br-item">🏨 住宿總計</span><span class="br-cost">¥195,670–205,670</span></div>
-        <div class="budget-row"><span class="br-item">🚋 交通（南海+近鐵+地鐵+ICOCA）</span><span class="br-cost">¥15,000–20,000</span></div>
-        <div class="budget-row"><span class="br-item">🍽️ 餐飲</span><span class="br-cost">¥55,000–100,000</span></div>
-        <div class="budget-row"><span class="br-item">🏟️ 景點門票</span><span class="br-cost">¥4,000–6,000</span></div>
-        <div class="budget-row"><span class="br-item">🛒 購物/伴手禮</span><span class="br-cost">¥10,000–30,000</span></div>
-        <div class="budget-row"><span class="br-item">★ 全程總預估（3人）</span><span class="br-cost">¥500,000–582,670<br><span style="font-size:11px;color:#888">≈ TWD 105,000–122,000</span></span></div>
-      </div>
-      <div style="font-size:11px;color:#888;margin-top:8px;text-align:center">※ 概估，實際費用依匯率及消費而異。參考匯率：1 JPY ≈ 0.21 TWD</div>
-    </div>
-
-    <!-- Transport Guide -->
-    <div class="info-section">
-      <div class="info-section-title">🗺️ 交通指南 Transport Guide</div>
-      <div class="info-card">
-        <ul>
-          <li><strong>南海電鐵</strong>：KIX ↔ 難波，Rapi:t 特急¥1,290 / 空港急行¥930</li>
-          <li><strong>近鐵奈良線</strong>：難波 ↔ 近鐵奈良，快速急行約40分鐘，¥680</li>
-          <li><strong>大阪地鐵</strong>：ICOCA 直接刷卡，無需購買周遊券</li>
-          <li><strong>計程車</strong>：起步約¥660，短程約¥1,000–2,000</li>
-        </ul>
-      </div>
-      <div class="info-card">
-        <div class="ic-label">交通卡</div>
-        <p>全程使用 ICOCA 卡最方便，大阪/奈良通用。在 KIX 機場購買（含¥500押金）。</p>
-      </div>
-    </div>
-
-    <!-- Elderly Tips -->
-    <div class="info-section">
-      <div class="info-section-title">👴 長輩同行貼心提醒</div>
-      <div class="info-card">
-        <ul>
-          <li>每 1.5–2 小時安排休息時間，避免過度疲勞</li>
-          <li>若草山爬到一重目即可，不必勉強登頂</li>
-          <li>奈良公園石板路注意腳下，穿舒適步行鞋</li>
-          <li>隨身攜帶水壺、小零食、常備藥品</li>
-          <li>計程車推薦：Japan Taxi APP（支援信用卡）</li>
-          <li>三笠旅館接駁車班次確認入住前確認</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Practical Info -->
-    <div class="info-section">
-      <div class="info-section-title">📱 實用資訊 Practical Info</div>
-      <div class="info-card">
-        <ul>
-          <li><strong>緊急電話</strong>：日本警察 110 / 消防救護 119</li>
-          <li><strong>翻譯 APP</strong>：推薦 Google 翻譯、Papago</li>
-          <li><strong>WiFi</strong>：建議租用行動 WiFi 或購買 eSIM</li>
-        </ul>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -622,10 +420,10 @@ const DAYS = [
         detail:{
           addr:"關西國際機場 第一航廈",
           text:["長榮 BR132 直飛大阪，飛行時間 2h40m。建議 06:30 抵達桃園機場。","通關、領行李預估 45–60 分鐘。建議先在機場購買/充值 ICOCA 卡。","搭乘南海電鐵 Rapi:t 到難波站（約 38 分鐘，¥1,290）。"],
-          tips:[],
+          tips:["訂位代號：旅伴A *** ｜ 旅伴B *** ｜ 旅伴C ***"],
           backup:"若 Rapi:t 客滿，可搭南海空港急行（約 45 分鐘，¥930）",
           rapit:{
-            buyUrl:"https://www.howto-osaka.com/tc/ticket/rapit/",
+            buyUrl:"https://plate.id/LpuETUB7",
             infoUrl:"https://www.howto-osaka.com/tc/ticket/rapit/",
             pricing:[
               ["提前購買 普通席","¥1,350/人（僅成人票）"],
@@ -667,7 +465,7 @@ const DAYS = [
         detail:{
           addr:"大阪府大阪市中央區難波",
           walk:"南海難波站 24號出口步行約 3 分鐘",
-          text:["入住時間 15:00 起。可先寄放行李，稍作休息後出發。","包含免費早餐。"]
+          text:["入住時間 15:00 起。可先寄放行李，稍作休息後出發。","單人房 + 雙人房","包含免費早餐。"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
           detail:"往東北方向→穿過千日前通→進入道頓堀商店街",
@@ -1129,14 +927,14 @@ const DAYS = [
   },
   {
     id:5, label:"Day 5", date:"4/12 (日)", color:"#9C27B0",
-    title:"大阪自由日·はせ川告別壽司", titleEn:"Free Day & Hasegawa Farewell Sushi",
+    title:"大阪自由日·さな井告別會席", titleEn:"Free Day & Sanai Farewell Kaiseki",
     center:[34.675,135.510], zoom:13,
     budget:[
       ["地鐵/交通","¥1,500–2,000"],
       ["午餐","¥3,000–6,000"],
-      ["晚餐（寿司はせ川）","¥15,000–30,000"],
+      ["晚餐（旬鮮和楽 さな井）已預約","¥49,800 (3人)"],
       ["購物/伴手禮","¥5,000–20,000"],
-      ["小計 (3人)","¥24,500–58,000"]
+      ["小計 (3人)","¥56,300–77,800"]
     ],
     stops: [
       { time:"09:30", zh:"方案A：大阪城公園", en:"Osaka Castle Park", lat:34.6873, lng:135.5262,
@@ -1187,27 +985,23 @@ const DAYS = [
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"回飯店休息後→傍晚步行至ときすし本店",
-          duration:"步行 2 分鐘", cost:"", modeClass:"t-mode-walk" }},
-      { time:"18:00", zh:"告別晚餐：寿司はせ川 心斎橋本店", en:"Sushi Hasegawa Shinsaibashi", lat:34.6735, lng:135.5015,
-        desc:"心齋橋高級壽司。職人Omakase握壽司套餐，適合告別晚宴。¥5,000–10,000/人", type:"meal",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%AF%BF%E5%8F%B8%E3%81%AF%E3%81%9B%E5%B7%9D+%E5%BF%83%E6%96%8E%E6%A9%8B%E6%9C%AC%E5%BA%97+Sushi+Hasegawa+Shinsaibashi+Osaka",
+          detail:"回飯店休息後→傍晚步行前往旬鮮和楽 さな井",
+          duration:"步行 10 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"18:30", zh:"✅ 告別晚餐：旬鮮和楽 さな井", en:"Shunsenwagaku Sanai (Kaiseki)", lat:34.6700, lng:135.5050,
+        desc:"已預約！會席料理全10品·掘りごたつ席（禁菸）。¥16,800/人", type:"meal",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E6%97%AC%E9%AE%AE%E5%92%8C%E6%A5%BD+%E3%81%95%E3%81%AA%E4%BA%95+Osaka",
         detail:{
-          addr:"1-3-3 Shinsaibashisuji, Chuo-ku, Osaka",
-          walk:"從 KOKO HOTEL 步行約 10 分鐘（沿心齋橋筋往北）",
-          text:["★ 旅程最後一晚的告別晚宴！","寿司はせ川 心斎橋本店（Sushi Hasegawa）——心齋橋壽司名店。","職人 Omakase 握壽司套餐，使用當日新鮮漁獲，一貫一貫現握。","環境優雅安靜，適合長輩慢慢享用。","預算約¥5,000–10,000/人"],
-          tips:["⏰ 建議提前預約 17:30–18:00 時段。週日晚餐熱門，無預約可能需等候。"],
-          backup:"若客滿，可選擇以下心齋橋周邊壽司替代",
-          alts:[
-            {n:"Kisau きさう",e:"Kisau (Shinsaibashi)",c:"心齋橋壽司·日本料理 ｜ ¥4,000–8,000/人｜Sophia133ビル 2F",u:"https://www.google.com/maps/search/?api=1&query=Kisau+%E3%81%8D%E3%81%95%E3%81%86+Shinsaibashi+Osaka"},
-            {n:"鮨ととぎん 心斎橋店",e:"Sushi Totogin Shinsaibashi",c:"心齋橋壽司 ｜ ¥3,000–6,000/人｜新鮮握壽司·吧檯席",u:"https://www.google.com/maps/search/?api=1&query=%E9%AE%A8%E3%81%A8%E3%81%A8%E3%81%8E%E3%82%93+%E5%BF%83%E6%96%8E%E6%A9%8B+Osaka"},
-            {n:"元祖ぶっち切り寿司 魚心 心斎橋店",e:"Uoshin Shinsaibashi (Sushi)",c:"平價壽司·大份量 ｜ ¥2,000–4,000/人｜CP值高·新鮮美味",u:"https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E5%BF%83+%E5%BF%83%E6%96%8E%E6%A9%8B+Uoshin+Osaka"},
-            {n:"おやじの最後の握り",e:"Oyaji's Final Nigiri (Shinsaibashi Izakaya)",c:"心齋橋壽司居酒屋 ｜ ¥2,000–5,000/人｜輕鬆氣氛·品項豐富",u:"https://www.google.com/maps/search/?api=1&query=%E3%81%8A%E3%82%84%E3%81%98%E3%81%AE%E6%9C%80%E5%BE%8C%E3%81%AE%E6%8F%A1%E3%82%8A+Shinsaibashi+Osaka"}
+          addr:"大阪市中央區（心齋橋·難波周邊）",
+          walk:"從 KOKO HOTEL 步行約 10 分鐘",
+          text:["★ 旅程最後一晚的告別晚宴！已預約確認！","旬鮮和楽 さな井——使用當季旬食材的正統會席料理。","【会席 さな井】全10品コース，¥16,800/人。","座席：掘りごたつ席（禁菸），適合長輩舒適用餐。","現地決済（店頭付款）¥49,800（3人）。"],
+          tips:["⏰ 預約時間 18:30，請準時到達（不接受提早入場）。","📞 如當日遲到請直接致電店舗：06-6214-0371","⚠️ 取消政策：2日前 50%、1日前/當日 100%"],
+          links:[
+            {label:"📍 さな井 一休.com 店舗頁面",url:"https://restaurant.ikyu.com/111757/"}
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"沿心齋橋筋往南步行回KOKO HOTEL，好好休息準備明日返程",
-          duration:"步行 10 分鐘 (800m)", cost:"", modeClass:"t-mode-walk" }},
+          detail:"晚餐後步行回KOKO HOTEL，好好休息準備明日返程",
+          duration:"步行 10 分鐘", cost:"", modeClass:"t-mode-walk" }},
     ]
   },
   {
@@ -1234,7 +1028,7 @@ const DAYS = [
           addr:"南海難波站 3F月台",
           text:["3F月台搭空港急行（或Rapi:t特急）前往KIX。","南海空港急行：約 45 分鐘，¥930/人","南海 Rapi:t 特急：約 38 分鐘，¥1,290/人（快6分鐘）"],
           rapit:{
-            buyUrl:"https://www.howto-osaka.com/tc/ticket/rapit/",
+            buyUrl:"https://plate.id/LpuETUB7",
             infoUrl:"https://www.howto-osaka.com/tc/ticket/rapit/",
             pricing:[
               ["提前購買 普通席","¥1,350/人"],
@@ -1763,9 +1557,6 @@ lc.innerHTML = DAYS.map(d=>`<div class="li"><div class="ldot" style="background:
 
 document.getElementById('legendBtn').onclick = () => document.getElementById('legendOverlay').classList.add('show');
 document.getElementById('legendOverlay').onclick = e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('show'); };
-
-// Trip Info button
-document.getElementById('infoBtn').onclick = () => document.getElementById('infoOverlay').classList.add('show');
 
 // ════════════════════════════════════════
 // INIT
