@@ -98,11 +98,11 @@
   /* ── DETAIL BUTTON on stop card ── */
   .detail-btn{
     display:inline-flex;align-items:center;gap:4px;margin-top:8px;
-    padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;
-    background:#8B6914;color:#fff;border:1px solid #7a5c10;cursor:pointer;
+    padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;
+    background:#f5f0e8;color:#1B2A4A;border:1px solid #e0d6cc;cursor:pointer;
     min-height:32px;transition:background .15s;
   }
-  .detail-btn:active{background:#6d5310;}
+  .detail-btn:active{background:#e0d6cc;}
 
   /* ── TRANSPORT CONNECTOR ── */
   .transport-con{
@@ -170,9 +170,9 @@
     border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;
     min-height:36px;cursor:pointer;
   }
-  .p-btn-maps{background:#1a65d6;color:#fff;font-weight:700;}
-  .p-btn-nav{background:#1d7d3a;color:#fff;font-weight:700;}
-  .p-btn-detail{background:#8B6914;color:#fff;border:none;font-family:inherit;font-weight:700;}
+  .p-btn-maps{background:#4285F4;color:#fff;}
+  .p-btn-nav{background:#34A853;color:#fff;}
+  .p-btn-detail{background:#C9A96E;color:#fff;border:none;font-family:inherit;}
   .p-btn-maps:active,.p-btn-nav:active,.p-btn-detail:active{opacity:.8;}
 
   /* ── LEGEND OVERLAY ── */
@@ -270,8 +270,8 @@
   .dt-alt .alt-cuisine{font-size:12px;color:#666;margin-top:3px;}
   .dt-alt .alt-link{
     display:inline-flex;align-items:center;gap:3px;margin-top:6px;
-    padding:5px 10px;border-radius:6px;background:#1a65d6;color:#fff;
-    font-size:11px;font-weight:700;text-decoration:none;
+    padding:5px 10px;border-radius:6px;background:#4285F4;color:#fff;
+    font-size:11px;font-weight:600;text-decoration:none;
   }
 
   /* Detail action buttons */
@@ -284,8 +284,8 @@
     text-decoration:none;min-height:48px;border:none;cursor:pointer;
     font-family:inherit;
   }
-  .dt-btn-maps{background:#1a65d6;color:#fff;font-weight:700;}
-  .dt-btn-nav{background:#1d7d3a;color:#fff;font-weight:700;}
+  .dt-btn-maps{background:#4285F4;color:#fff;}
+  .dt-btn-nav{background:#34A853;color:#fff;}
   .dt-btn-maps:active,.dt-btn-nav:active{opacity:.8;}
 
   /* ── DESKTOP SIDEBAR ── */
@@ -420,7 +420,7 @@ const DAYS = [
         detail:{
           addr:"關西國際機場 第一航廈",
           text:["長榮 BR132 直飛大阪，飛行時間 2h40m。建議 06:30 抵達桃園機場。","通關、領行李預估 45–60 分鐘。建議先在機場購買/充值 ICOCA 卡。","搭乘南海電鐵 Rapi:t 到難波站（約 38 分鐘，¥1,290）。"],
-          tips:["訂位代號：旅伴A *** ｜ 旅伴B *** ｜ 旅伴C ***"],
+          tips:["訂位代號：請查閱個人確認信"],
           backup:"若 Rapi:t 客滿，可搭南海空港急行（約 45 分鐘，¥930）",
           rapit:{
             buyUrl:"https://plate.id/LpuETUB7",
@@ -465,7 +465,7 @@ const DAYS = [
         detail:{
           addr:"大阪府大阪市中央區難波",
           walk:"南海難波站 24號出口步行約 3 分鐘",
-          text:["入住時間 15:00 起。可先寄放行李，稍作休息後出發。","單人房 + 雙人房","包含免費早餐。"]
+          text:["入住時間 15:00 起。可先寄放行李，稍作休息後出發。","單人房 + 雙人房各一間","包含免費早餐。"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
           detail:"往東北方向→穿過千日前通→進入道頓堀商店街",
@@ -502,9 +502,14 @@ const DAYS = [
           text:["石疊小巷中藏有超過60間老舖餐廳，入夜後提燈點亮，彷彿穿越200年。","先參拜水掛不動明王（往石佛像潑水許願），再沿巷弄找間喜歡的小店用餐。","預算參考：¥2,000–5,000/人","以下為橫丁內及周邊步行1分鐘內的推薦店家："],
           tips:["⏰ 建議 17:30–18:00 入店，避開 19:00 後的晚餐尖峰。橫丁內小店多，若一間排隊就換下一間。","🍡 飯後甜點推薦「夫婦善哉」（橫丁入口）——名物紅豆湯圓，兩碗一組象徵夫婦圓滿，¥800。"],
           alts:[
-            {n:"迴轉壽司長次郎 法善寺店",e:"CHOJIRO Hozenji (Conveyor Belt Sushi)",c:"迴轉壽司·法善寺橫丁 ｜ ¥2,000–4,000/人｜新鮮握壽司·職人現握",u:"https://www.google.com/maps/search/?api=1&query=%E5%BB%BB%E8%BB%A2%E5%AF%BF%E5%8F%B8CHOJIRO+%E6%B3%95%E5%96%84%E5%AF%BA+Osaka"},
-            {n:"天ぷら天山 法善寺横丁",e:"Tempura Tenzen Hozenji",c:"天婦羅專門店·法善寺横丁老舖 ｜ ¥2,500–5,000/人｜現炸天婦羅·吧檯席有氣氛",u:"https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E3%81%B7%E3%82%89%E5%A4%A9%E5%B1%B1+%E6%B3%95%E5%96%84%E5%AF%BA%E6%A8%AA%E4%B8%81+Osaka"},
-            {n:"現代割烹 法善寺momo",e:"Modern Kappo Hozenji Momo",c:"現代割烹·法善寺 ｜ ¥3,000–6,000/人｜創作和食·時令食材",u:"https://www.google.com/maps/search/?api=1&query=%E7%8F%BE%E4%BB%A3%E5%89%B2%E7%83%B9+%E6%B3%95%E5%96%84%E5%AF%BAmomo+Osaka"}
+            {n:"串の坊 法善寺本店",e:"Kushinobou Hozenji Honten",c:"高級串揚專門店·法善寺橫丁老舖 ｜ 套餐 ¥3,000–6,000/人｜一串一串現炸上桌，可隨時喊停",u:"https://www.google.com/maps/search/?api=1&query=%E4%B8%B2%E3%81%AE%E5%9D%8A+%E6%B3%95%E5%96%84%E5%AF%BA%E6%9C%AC%E5%BA%97+Osaka"},
+            {n:"福太郎 本店",e:"Fukutaro Honten (Okonomiyaki/Negiyaki)",c:"大阪燒·蔥燒名店 ｜ Tabelog 3.70 ｜ ¥2,000–3,000/人｜招牌「すじねぎ焼」牛筋蔥燒必點",u:"https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E5%A4%AA%E9%83%8E+%E6%9C%AC%E5%BA%97+%E5%8D%83%E6%97%A5%E5%89%8D+Osaka"},
+            {n:"元祖串かつ だるま 法善寺店",e:"Daruma Kushikatsu Hozenji",c:"昭和4年(1929)創業串炸元祖 ｜ ¥2,000–3,000/人｜招牌「どて焼き」味噌牛筋煮＋串炸套餐",u:"https://www.google.com/maps/search/?api=1&query=%E3%81%A0%E3%82%8B%E3%81%BE+%E6%B3%95%E5%96%84%E5%AF%BA+Daruma+Hozenji+Osaka"},
+            {n:"法善寺 三平",e:"Hozenji Sanpei (Okonomiyaki)",c:"法善寺橫丁內大阪燒老舖 ｜ Tabelog 3.44 ｜ ¥1,500–2,500/人｜鐵板前座位有氣氛",u:"https://www.google.com/maps/search/?api=1&query=%E6%B3%95%E5%96%84%E5%AF%BA+%E4%B8%89%E5%B9%B3+Hozenji+Sanpei+Osaka"},
+            {n:"六覺燈",e:"Rokkakutei (Premium Kushiage)",c:"創作串揚名店·1980年創業 ｜ Tabelog 3.69 ｜ ¥10,000–15,000/人｜旬食材高級串揚套餐·木質典雅空間（適合慶祝）",u:"https://www.google.com/maps/search/?api=1&query=%E5%85%AD%E8%A6%BA%E7%87%88+Rokkakutei+Osaka"},
+            {n:"天ぷら天善",e:"Tempura Tenzen",c:"道頓堀附近天婦羅名店 ｜ ¥3,000–6,000/人｜炸蝦·野菜天婦羅套餐，清爽不油膩，長輩友善",u:"https://www.google.com/maps/search/?api=1&query=Tempura+Tenzen+%E5%A4%A9%E3%81%B7%E3%82%89%E5%A4%A9%E5%96%84+Osaka+Dotonbori"},
+            {n:"神戶牛 和之宮 東方飯店店",e:"Kobe Beef Wanomiya",c:"神戶牛燒肉·頂級和牛 ｜ ¥6,000–12,000/人｜步行3分鐘可達，適合第一晚犒賞自己",u:"https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E6%88%B8%E7%89%9B+%E5%92%8C%E4%B9%8B%E5%AE%AE+%E6%9D%B1%E6%96%B9%E9%A3%AF%E5%BA%97+Osaka"},
+            {n:"味樂館 鐵板燒 Hikari",e:"Teppanyaki Hikari (Namba)",c:"難波站步行3分鐘(ナンバウォーク16番出口)·地下B1F鐵板燒 ｜ ¥4,000–8,000/人｜現場鐵板烹調，視覺享受",u:"https://www.google.com/maps/search/?api=1&query=%E5%91%B3%E6%A5%BD%E9%A4%A8+%E9%90%B5%E6%9D%BF%E7%87%92+Hikari+Namba+Osaka"}
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
@@ -576,38 +581,38 @@ const DAYS = [
           tips:["🪑 河堤沿岸有長椅可坐下休息賞花。","🚻 大宮通附近有公廁。"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"沿佐保川往東走 → 經大宮通南行回車站一帶 → 轉東沿登大路通進入奈良公園",
-          duration:"步行 18 分鐘 (1.2km)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"10:30", zh:"奈良公園·鹿互動", en:"Nara Park & Deer", lat:34.6851, lng:135.8430,
-        desc:"購買鹿仙貝¥200餵鹿。注意：鹿很主動，留意包包！", type:"spot",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=Nara+Park+%E5%A5%88%E8%89%AF%E5%85%AC%E5%9C%92",
-        detail:{
-          addr:"奈良公園一帶",
-          walk:"從佐保川步行約 18 分鐘（經車站、登大路通東行）",
-          text:["沿登大路通步行進入奈良公園。","購買鹿仙貝 ¥200 與可愛小鹿互動拍照。","💡 回程經過車站時（10:00後），可順路將行李箱從置物櫃取出，送至三笠案內所（5號出口對面，1分鐘）。"],
-          tips:["長輩注意：鹿會主動靠近搶食，留意包包和手上物品。","🪑 公園內長椅多，隨時可休息。"]
-        },
-        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"穿過公園往東北→沿參道前往南大門",
-          duration:"步行 10 分鐘 (600m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"11:00", zh:"東大寺 大佛殿", en:"Todaiji Temple", lat:34.6890, lng:135.8398,
+          detail:"沿佐保川往東走 → 經轉害門（東大寺北門）直接進入東大寺",
+          duration:"步行 20 分鐘 (1.3km)", cost:"", modeClass:"t-mode-walk" }},
+      { time:"10:30", zh:"東大寺 大佛殿", en:"Todaiji Temple", lat:34.6890, lng:135.8398,
         desc:"世界最大木造建築，大佛高15m。門票¥600/人", type:"spot",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Todaiji+Temple+%E6%9D%B1%E5%A4%A7%E5%AF%BA+Nara",
         detail:{
           addr:"406-1 Zoshicho, Nara, 630-8211",
-          walk:"從奈良公園步行約 10 分鐘",
-          text:["世界最大木造建築、奈良大佛（高15m）。入場費 ¥600/人。","從南大門慢步欣賞參道櫻花，經鏡池前往大佛殿。","預計參觀約 50–60 分鐘。"],
-          tips:["🪑 長輩可在鏡池畔旁的長椅休息。園內設有無障礙步道。"]
+          walk:"從佐保川步行約 20 分鐘（沿河堤往東→轉害門進入東大寺境内）",
+          text:["世界最大木造建築、奈良大佛（高15m）。入場費 ¥600/人。","從轉害門（北側）進入，經鏡池前往大佛殿。","預計參觀約 50–60 分鐘。"],
+          tips:["🪑 長輩可在鏡池畔旁的長椅休息。園內設有無障礙步道。","💡 轉害門是東大寺的北門，遊客較少，從佐保川過來最順路。"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"從東大寺南大門往西南走→經奈良公園→高畑町方向",
-          duration:"步行 12 分鐘 (800m)", cost:"", modeClass:"t-mode-walk" }},
+          detail:"從東大寺南大門往南走→進入奈良公園鹿群區域",
+          duration:"步行 5 分鐘 (300m)", cost:"", modeClass:"t-mode-walk" }},
+      { time:"11:40", zh:"奈良公園·鹿互動", en:"Nara Park & Deer", lat:34.6851, lng:135.8430,
+        desc:"購買鹿仙貝¥200餵鹿。注意：鹿很主動，留意包包！", type:"spot",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Nara+Park+%E5%A5%88%E8%89%AF%E5%85%AC%E5%9C%92",
+        detail:{
+          addr:"奈良公園一帶（東大寺南大門前方）",
+          walk:"從東大寺南大門出來即到",
+          text:["從東大寺南大門出來，公園裡到處都有鹿群。","購買鹿仙貝 ¥200 與可愛小鹿互動拍照。","約 15–20 分鐘互動後，沿登大路通往西走向志津香。"],
+          tips:["長輩注意：鹿會主動靠近搶食，留意包包和手上物品。","🪑 公園內長椅多，隨時可休息。"]
+        },
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
+          detail:"沿登大路通往西走→興福寺旁即到志津香",
+          duration:"步行 8 分鐘 (500m)", cost:"", modeClass:"t-mode-walk" }},
       { time:"12:00", zh:"午餐：志津香 釜飯 公園店", en:"Lunch: Shizuka Kamameshi", lat:34.6832, lng:135.8325,
         desc:"奈良名物釜飯老舖。每鍋現點現做，¥1,300–1,800/人。建議11:30前取號", type:"meal",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%BF%97%E6%B4%A5%E9%A6%99+%E9%87%9C%E9%A3%AF+%E5%85%AC%E5%9C%92%E5%BA%97+Shizuka+Nara",
         detail:{
           addr:"59 Noboriojicho, Nara, 630-8213（興福寺旁、登大路通沿い）",
-          walk:"從東大寺南大門步行約 10 分鐘（往西南經奈良公園→興福寺旁）",
+          walk:"從奈良公園步行約 8 分鐘（沿登大路通往西→興福寺旁）",
           text:["奈良名物釜飯老舖，每鍋現點現做，使用當季食材。","招牌「七種釜めし」（七種釜飯）¥1,300、「奈良七種釜めし」¥1,620。","每鍋約需等候 20–30 分鐘現做，但味道值得等待。","位於登大路通上、興福寺旁，地理位置絕佳。","預算約¥1,300–1,800/人"],
           tips:["⏰ 櫻花季（4月上旬）排隊可達 40–60 分鐘！強烈建議 11:30 前到店取號。","💡 取號後可在附近興福寺、猿沢池散步等候，店家會電話通知。","🪑 有桌椅座位，長輩友善。"],
           alts:[
@@ -617,7 +622,7 @@ const DAYS = [
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶→🚐", label:"徒步 → 散步回車站",
-          detail:"午餐後往西步行 5 分鐘回近鐵奈良站→休息→搭14:45旅館接駁車上山",
+          detail:"午餐後往西步行 5 分鐘回近鐵奈良站→順路取行李箱送至三笠案內所（5號出口對面）→搭14:45接駁車上山",
           duration:"步行5分 + 等候接駁", cost:"接駁免費", modeClass:"t-mode-walk" }},
       { time:"14:45", zh:"三笠旅館 Check-in", en:"Mikasa Ryokan", lat:34.6833, lng:135.8520,
         desc:"月之棟和室10疊。入住後享受溫泉、觀景休息", type:"hotel",
@@ -741,7 +746,10 @@ const DAYS = [
           alts:[
             {n:"江戶川 奈良町店",e:"Edogawa Naramachi (Unagi)",c:"古民家鰻魚料理 ｜ ¥3,000–6,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E6%B1%9F%E6%88%B8%E5%B7%9D+%E5%A5%88%E8%89%AF%E7%94%BA+Edogawa+Nara"},
             {n:"奈良町豆腐庵 こんどう",e:"Naramachi Tofu-an Kondo",c:"豆腐懷石料理 ｜ ¥2,000–3,500/人",u:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF%E7%94%BA%E8%B1%86%E8%85%90%E5%BA%B5+%E3%81%93%E3%82%93%E3%81%A9%E3%81%86+Nara"},
-            {n:"Kanakana 奈良町",e:"Kanakana (Machiya Cafe)",c:"町家和食定食 ｜ ¥1,500–2,500/人",u:"https://www.google.com/maps/search/?api=1&query=Kanakana+%E5%A5%88%E8%89%AF%E7%94%BA+Nara"}
+            {n:"Kanakana 奈良町",e:"Kanakana (Machiya Cafe)",c:"町家和食定食 ｜ ¥1,500–2,500/人",u:"https://www.google.com/maps/search/?api=1&query=Kanakana+%E5%A5%88%E8%89%AF%E7%94%BA+Nara"},
+            {n:"お料理 ひろ岡",e:"Oryori Hirooka (Omakase)",c:"頂級日本料理OMAKASE・春日大社往奈良町順路 ｜ ¥8,000–15,000/人｜12:00入座",u:"https://www.google.com/maps/search/?api=1&query=%E3%81%8A%E6%96%99%E7%90%86+%E3%81%B2%E3%82%8D%E5%B2%A1+Nara+34.6812835+135.8298606"},
+            {n:"Akordu 奈良（米其林）",e:"Akordu Nara (Michelin)",c:"奈良町水門町 70-1-3-1·米其林推薦·日式法式融合 ｜ ¥6,000–12,000/人｜需預約",u:"https://www.google.com/maps/search/?api=1&query=Akordu+%E5%A5%88%E8%89%AF+Suimoncho"},
+            {n:"今西家書院 岡田（米其林）",e:"Okada Nara (Michelin)",c:"奈良町今御門町 26-2·米其林推薦·傳統日本料理 ｜ ¥5,000–10,000/人｜需預約",u:"https://www.google.com/maps/search/?api=1&query=%E5%B2%A1%E7%94%B0+%E5%A5%88%E8%89%AF%E7%94%BA+Imamikadocho+Nara"}
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
@@ -765,12 +773,14 @@ const DAYS = [
             "• 天極堂 奈良本店 — 吉野葛粉甜品老舖。推薦葛きり、葛もち。¥800–1,200/人",
             "• 大佛布丁 本店 — 奈良人氣布丁！瓶身印大佛插畫。招牌原味、抹茶口味。¥400/個",
             "• Kanakana — 町家改建和食咖啡。招牌「かなかな御膳」定食。¥1,500–2,500/人",
-            "• 茶房暖暖 — 古民家風格喫茶。手作甜點和咖啡。¥800–1,500/人"
+            "• 茶房暖暖 — 古民家風格喫茶。手作甜點和咖啡。¥800–1,500/人",
+            "• ロクメイコーヒー奈良店 — 奈良町內精品咖啡名店。自家烘焙單品豆、手沖咖啡。¥700–1,200/人。奈良精品咖啡首選。"
           ],
           tips:[
             "⏰ 大佛布丁本店建議 14:00 前到，熱門口味下午常售罄",
             "⏰ 天極堂平日下午通常免排隊",
             "⏰ Kanakana 午餐排隊較長，14:00 後人潮減少",
+            "☕ ロクメイコーヒー奈良町店下午人潮較少，散步後喝咖啡的好去處",
             "🪑 奈良町步道平坦好走，適合長輩。格子の家、にぎわいの家均有室內座位可休息"
           ],
           links:[
@@ -782,6 +792,7 @@ const DAYS = [
             {label:"🍵 天極堂 奈良本店", url:"https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E6%A5%B5%E5%A0%82+%E5%A5%88%E8%89%AF%E6%9C%AC%E5%BA%97+1-6+Oshiagecho"},
             {label:"🍮 大佛布丁 本店", url:"https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E4%BB%8F%E3%83%97%E3%83%AA%E3%83%B3+%E6%9C%AC%E5%BA%97+16+Kasuganocho+Nara"},
             {label:"🍽 Kanakana 奈良町", url:"https://www.google.com/maps/search/?api=1&query=Kanakana+%E5%A5%88%E8%89%AF%E7%94%BA+13+Kunodocho"},
+            {label:"☕ ロクメイコーヒー奈良店", url:"https://www.google.com/maps/search/?api=1&query=%E3%83%AD%E3%82%AF%E3%83%A1%E3%82%A4%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC+%E5%A5%88%E8%89%AF%E7%94%BA"},
             {label:"☕ 茶房暖暖", url:"https://www.google.com/maps/search/?api=1&query=%E8%8C%B6%E6%88%BF%E6%9A%96%E6%9A%96+43-2+Nishinoshinyacho+Nara"}
           ]
         },
@@ -806,15 +817,14 @@ const DAYS = [
   },
   {
     id:4, label:"Day 4", date:"4/11 (六)", color:"#2196F3",
-    title:"返回大阪·黑門·難波CITY·敘敘苑", titleEn:"Osaka: Kuromon, Namba CITY & Jojoen",
+    title:"返回大阪·黑門·敘敘苑", titleEn:"Osaka: Kuromon & Jojoen",
     center:[34.664,135.504], zoom:14,
     budget:[
       ["近鐵奈良→難波 ×3人","¥2,040"],
       ["黑門市場午餐 ×3人","¥6,000–12,000"],
       ["KOKO HOTEL（2晚）","約¥30,000–40,000"],
-      ["難波CITY 購物","¥3,000–10,000"],
       ["敘敘苑晚餐 ×3人","¥15,000–24,000"],
-      ["小計 (3人)","¥56,040–88,040"]
+      ["小計 (3人)","¥53,040–78,040"]
     ],
     stops: [
       { time:"09:00", zh:"退房·搭接駁車下山", en:"Check Out", lat:34.6833, lng:135.8520,
@@ -880,30 +890,14 @@ const DAYS = [
           detail:"從黑門市場往西走回飯店",
           duration:"步行 3 分鐘 (250m)", cost:"", modeClass:"t-mode-walk" }},
       { time:"13:30", zh:"辦理入住·休息", en:"Check In & Rest", lat:34.6635, lng:135.5050,
-        desc:"回飯店入住休息。稍作休息後前往難波CITY購物", type:"hotel",
+        desc:"回飯店入住休息。可逛千日前道具街（2分鐘）", type:"hotel",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=KOKO+HOTEL+Osaka+Namba+Sennichimae",
         detail:{
           addr:"KOKO HOTEL Osaka Namba Sennichimae",
-          text:["回飯店辦理入住，稍作休息再出發。","下午前往難波CITY購物（車站直結，冷氣舒適，長輩友善）。"]
+          text:["回飯店辦理入住，稍作休息再出發。","若還有體力，可逛千日前道具街（步行 5 分鐘）。"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"沿千日前通往西→南海難波站方向",
-          duration:"步行 8 分鐘 (600m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"15:00", zh:"難波CITY 購物", en:"Namba CITY Shopping", lat:34.6650, lng:135.5010,
-        desc:"南海難波站直結購物中心。伴手禮·藥妝·服飾·美食街。冷氣舒適，長輩友善", type:"spot",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=Namba+CITY+%E9%9B%A3%E6%B3%A2CITY+Osaka",
-        detail:{
-          addr:"5-1-60 Namba, Chuo-ku, Osaka（南海難波站直結）",
-          walk:"從 KOKO HOTEL 步行約 8 分鐘",
-          text:["南海難波站直結的購物中心，地下2F～2F 共約250間店舖。","全室內有冷氣，下雨也不影響，非常適合長輩逛街。","🛍 伴手禮推薦區域：B2F 食品街——りくろーおじさんの店（起司蛋糕）、551蓬萊（肉包）、點天（一口煎餃）。","💊 藥妝：1F 有大型藥妝店，可補貨。","👗 服飾：UNIQLO、GU、各式日系品牌。","☕ 逛累可到 B1F 咖啡廳休息。"],
-          tips:["⏰ 營業時間：購物 10:00–21:00 ｜ 餐廳 11:00–22:00","💡 購票附贈的南海電鐵難波 CITY / Parks / SkyO 優惠券可在此使用！","🪑 館內有多處休息座椅區，長輩可隨時休息"],
-          links:[
-            {label:"🛍 難波CITY 官方網站",url:"https://www.nambacity.com/"},
-            {label:"📍 難波CITY Google Maps",url:"https://www.google.com/maps/search/?api=1&query=Namba+CITY+%E9%9B%A3%E6%B3%A2CITY+Osaka"}
-          ]
-        },
-        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"從難波CITY沿心齋橋筋商店街往北步行",
+          detail:"沿心齋橋筋商店街往北步行",
           duration:"步行 12 分鐘 (900m)", cost:"", modeClass:"t-mode-walk" }},
       { time:"17:30", zh:"晚餐：敘敘苑 燒肉", en:"Jojoen Yakiniku", lat:34.6720, lng:135.5020,
         desc:"高級和牛燒肉。推薦心齋橋店。建議電話預約。¥5,000–8,000/人", type:"meal",
@@ -917,7 +911,10 @@ const DAYS = [
           alts:[
             {n:"個室和牛燒肉 吟",e:"Koshitsu Wagyu Yakiniku Gin",c:"個室和牛燒肉 ｜ ¥5,000–8,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E5%80%8B%E5%AE%A4%E5%92%8C%E7%89%9B%E7%87%92%E8%82%89+%E5%90%9F+Namba+Osaka"},
             {n:"薩摩牛の藏",e:"Satsuma-gyu no Kura",c:"薩摩黑牛燒肉 ｜ ¥4,000–7,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E8%96%A9%E6%91%A9%E7%89%9B%E3%81%AE%E8%97%8F+Namba+Osaka"},
-            {n:"松坂燒肉 M 難波店",e:"Matsusaka Yakiniku M Namba",c:"松坂牛燒肉 ｜ ¥5,000–10,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E6%9D%BE%E5%9D%82%E7%87%92%E8%82%89+M+Namba+Osaka"}
+            {n:"松坂燒肉 M 難波店",e:"Matsusaka Yakiniku M Namba",c:"松坂牛燒肉 ｜ ¥5,000–10,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E6%9D%BE%E5%9D%82%E7%87%92%E8%82%89+M+Namba+Osaka"},
+            {n:"炭火焼肉 和牛苑",e:"Sumibi Yakiniku Wagyuen",c:"千日前 2-3-3，距 KOKO HOTEL 僅 2 分鐘｜炭火和牛燒肉，順路回飯店 ｜ ¥4,000–8,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E7%82%AD%E7%81%AB%E7%84%BC%E8%82%89+%E5%92%8C%E7%89%9B%E8%8B%91+%E5%8D%83%E6%97%A5%E5%89%8D+Osaka"},
+            {n:"神戶牛 和之宮 東方飯店店",e:"Kobe Beef Wanomiya (Oriental Hotel)",c:"神戶牛燒肉·頂級和牛 ｜ ¥6,000–12,000/人｜道頓堀附近步行可達",u:"https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E6%88%B8%E7%89%9B+%E5%92%8C%E4%B9%8B%E5%AE%AE+%E6%9D%B1%E6%96%B9%E9%A3%AF%E5%BA%97+Osaka"},
+            {n:"味樂館 鐵板燒 Hikari",e:"Teppanyaki Hikari (Namba)",c:"ナンバウォーク 16番出口 B1F，難波站步行 3 分鐘｜鐵板燒套餐 ｜ ¥4,000–8,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E5%91%B3%E6%A5%BD%E9%A4%A8+%E9%90%B5%E6%9D%BF%E7%87%92+Hikari+Namba+Osaka"}
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
@@ -927,14 +924,14 @@ const DAYS = [
   },
   {
     id:5, label:"Day 5", date:"4/12 (日)", color:"#9C27B0",
-    title:"大阪自由日·さな井告別會席", titleEn:"Free Day & Sanai Farewell Kaiseki",
+    title:"大阪自由日·さな井懷石【已訂位】", titleEn:"Free Day & Kaiseki Farewell",
     center:[34.675,135.510], zoom:13,
     budget:[
       ["地鐵/交通","¥1,500–2,000"],
       ["午餐","¥3,000–6,000"],
-      ["晚餐（旬鮮和楽 さな井）已預約","¥49,800 (3人)"],
+      ["晚餐：旬鮮和楽 さな井（已訂位·3人）","¥49,800"],
       ["購物/伴手禮","¥5,000–20,000"],
-      ["小計 (3人)","¥56,300–77,800"]
+      ["小計 (3人)","¥57,300–71,800"]
     ],
     stops: [
       { time:"09:30", zh:"方案A：大阪城公園", en:"Osaka Castle Park", lat:34.6873, lng:135.5262,
@@ -985,22 +982,30 @@ const DAYS = [
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"回飯店休息後→傍晚步行前往旬鮮和楽 さな井",
-          duration:"步行 10 分鐘", cost:"", modeClass:"t-mode-walk" }},
-      { time:"18:30", zh:"✅ 告別晚餐：旬鮮和楽 さな井", en:"Shunsenwagaku Sanai (Kaiseki)", lat:34.6700, lng:135.5050,
-        desc:"已預約！會席料理全10品·掘りごたつ席（禁菸）。¥16,800/人", type:"meal",
+          detail:"回飯店休息後→傍晚步行至ときすし本店",
+          duration:"步行 2 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"18:30", zh:"晚餐：旬鮮和楽 さな井【已訂位】", en:"Dinner: Shunsen Warakuen Sanai (Reserved)", lat:34.6720, lng:135.5055,
+        desc:"★已確認訂位！懷石三愛10道料理。¥16,800/人。18:30入座", type:"meal",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=%E6%97%AC%E9%AE%AE%E5%92%8C%E6%A5%BD+%E3%81%95%E3%81%AA%E4%BA%95+Osaka",
         detail:{
-          addr:"大阪市中央區（心齋橋·難波周邊）",
-          walk:"從 KOKO HOTEL 步行約 10 分鐘",
-          text:["★ 旅程最後一晚的告別晚宴！已預約確認！","旬鮮和楽 さな井——使用當季旬食材的正統會席料理。","【会席 さな井】全10品コース，¥16,800/人。","座席：掘りごたつ席（禁菸），適合長輩舒適用餐。","現地決済（店頭付款）¥49,800（3人）。"],
-          tips:["⏰ 預約時間 18:30，請準時到達（不接受提早入場）。","📞 如當日遲到請直接致電店舗：06-6214-0371","⚠️ 取消政策：2日前 50%、1日前/當日 100%"],
-          links:[
-            {label:"📍 さな井 一休.com 店舗頁面",url:"https://restaurant.ikyu.com/111757/"}
+          addr:"大阪市中央區（心齋橋/難波周邊）",
+          walk:"從 KOKO HOTEL 步行 約 10 分鐘",
+          text:[
+            "★ 已確認訂位！",
+            "旬鮮和楽 さな井（懷石三愛）— 採用時令食材的10道精緻懷石料理。",
+            "座位：下掘式座席（掘りごたつ），禁煙，舒適寬敞。",
+            "費用：¥16,800/人（3人合計¥49,800，含積分折扣¥600）",
+            "餐廳電話：06-6214-0371"
+          ],
+          tips:[
+            "⏰ 訂位時間 18:30，請提前 10 分鐘到店確認",
+            "⚠️ 取消規定嚴格：當日/前1日取消100%，前2日取消50%。請確保準時赴約！",
+            "🍽️ 懷石三愛：前菜→煮物→刺身→燒物→揚物等10道季節料理",
+            "🌿 如有食物過敏，請訂位時或到店時告知服務人員"
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"晚餐後步行回KOKO HOTEL，好好休息準備明日返程",
+          detail:"步行回KOKO HOTEL，好好休息準備明日返程",
           duration:"步行 10 分鐘", cost:"", modeClass:"t-mode-walk" }},
     ]
   },
