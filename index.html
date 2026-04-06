@@ -419,7 +419,7 @@ const DAYS = [
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport+KIX",
         detail:{
           addr:"關西國際機場 第一航廈",
-          text:["長榮 BR132 直飛大阪，飛行時間 2h40m。建議 06:30 抵達桃園機場。","通關、領行李預估 45–60 分鐘。建議先在機場購買/充值 ICOCA 卡。","搭乘南海電鐵 Rapi:t 到難波站（約 38 分鐘，¥1,290）。"],
+          text:["長榮 BR132 直飛大阪，飛行時間 2h40m。建議 06:30 抵達桃園機場。","通關、領行李預估 45–60 分鐘。建議先在機場購買/充值 ICOCA 卡。","已預約 13:35 南海電鐵 Rapi:t（有指定席）。KIX 出發 13:35 → 難波站 14:13（38 分鐘，¥1,350/人）。"],
           tips:["訂位代號：Chenyang F2T4UV ｜ Kwohsiung F2PDUV ｜ Shufen F2RD6N"],
           backup:"若 Rapi:t 客滿，可搭南海空港急行（約 45 分鐘，¥930）",
           rapit:{
@@ -447,9 +447,9 @@ const DAYS = [
           }
         },
         nextTransport:{ mode:"train", icon:"🚃", label:"南海電鐵 Rapi:t 特急",
-          detail:"南海電鐵 Rapi:t 特急，KIX → 難波站，全車對號入座（建議提前線上購票）",
+          detail:"南海電鐵 Rapi:t 特急，13:35 KIX 出發 → 14:13 難波站抵達（已預約指定席）",
           duration:"38 分鐘", cost:"¥1,350/人（提前購票）", modeClass:"t-mode-train" }},
-      { time:"13:00", zh:"難波站", en:"Namba Station", lat:34.6656, lng:135.5013,
+      { time:"14:13", zh:"難波站", en:"Namba Station", lat:34.6656, lng:135.5013,
         desc:"抵達南海難波站 3F。從南出口出站", type:"transport",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Namba+Station+%E9%9B%A3%E6%B3%A2%E9%A7%85+Osaka",
         detail:{
@@ -459,7 +459,7 @@ const DAYS = [
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
           detail:"南海難波站南出口→沿御堂筋方向南行",
           duration:"步行 7 分鐘 (500m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"13:15", zh:"東橫INN 難波", en:"Toyoko Inn Namba", lat:34.6610, lng:135.4985,
+      { time:"14:20", zh:"東橫INN 難波", en:"Toyoko Inn Namba", lat:34.6610, lng:135.4985,
         desc:"寄放行李（或16:00後入住）。稍作休息後出發", type:"hotel",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Osaka+Namba+%E6%9D%B1%E6%A8%AAINN",
         detail:{
