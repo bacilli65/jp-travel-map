@@ -8,15 +8,34 @@
 <meta name="apple-mobile-web-app-title" content="奈良大阪行程">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1B2A4A">
-<meta name="description" content="Nara & Osaka 6-Day Interactive Trip Map">
+<meta name="description" content="Nara & Osaka 6-Day Interactive Trip Map — Rain Backup Plan">
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗾</text></svg>">
-<title>奈良·大阪 行程地圖</title>
+<title>奈良大阪旅遊地圖 2026 — 雨天備案</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{height:100%;overflow:hidden;font-family:'Noto Sans TC','Segoe UI',sans-serif;background:#1B2A4A;color:#1B2A4A;}
+
+  /* ── RAIN BACKUP BANNER ── */
+  .rain-banner{
+    position:fixed;top:0;left:0;right:0;z-index:9999;
+    background:linear-gradient(135deg,#1565C0,#0D47A1);
+    color:#fff;text-align:center;
+    padding:10px 14px;
+    font-size:13px;font-weight:700;letter-spacing:.3px;
+    box-shadow:0 2px 12px rgba(0,0,0,.35);
+    line-height:1.5;
+    border-bottom:3px solid #42A5F5;
+  }
+  .rain-banner .banner-close{
+    position:absolute;right:12px;top:50%;transform:translateY(-50%);
+    background:rgba(255,255,255,.2);border:none;color:#fff;
+    width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .rain-banner .banner-close:active{background:rgba(255,255,255,.35);}
 
   /* ── MAP (full screen on mobile) ── */
   #map{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;}
@@ -339,17 +358,23 @@
 </head>
 <body>
 
+<!-- RAIN BACKUP BANNER -->
+<div class="rain-banner" id="rainBanner">
+  ☔ 雨天備案版 | 若草山 Day 2 / 東大寺 Day 3 | 若 Day 3 天氣不佳時啟用
+  <button class="banner-close" onclick="document.getElementById('rainBanner').style.display='none'" title="關閉">✕</button>
+</div>
+
 <!-- MOBILE: Top bar -->
-<div class="topbar">
+<div class="topbar" style="top:44px;">
   <div class="topbar-title">🗾 奈良·大阪 <span>行程地圖</span></div>
-  <div class="topbar-sub">April 8–13, 2026 · 含即時定位與導航</div>
+  <div class="topbar-sub">April 8–13, 2026 · ☔ 雨天備案版</div>
 </div>
 
 <!-- MOBILE: Day tabs -->
-<div class="day-tabs" id="dayTabs"></div>
+<div class="day-tabs" id="dayTabs" style="top:106px;"></div>
 
 <!-- MAP -->
-<div id="map"></div>
+<div id="map" style="top:44px;"></div>
 
 <!-- MOBILE: Bottom sheet -->
 <div class="sheet collapsed" id="sheet">
@@ -361,8 +386,8 @@
 <!-- DESKTOP: Sidebar -->
 <div class="sidebar-desk" id="sidebarDesk">
   <div class="desk-header">
-    <h2>🗾 奈良·大阪 6日行程地圖</h2>
-    <div class="route-info">April 8–13, 2026 — 3 Travelers — 含交通方式與步行時間</div>
+    <h2>☔ 奈良·大阪 雨天備案地圖</h2>
+    <div class="route-info">April 8–13, 2026 — 3 Travelers — 若草山 Day 2 / 東大寺 Day 3</div>
   </div>
   <div class="desk-tabs" id="deskTabs"></div>
   <div class="desk-detail-back" id="deskDetailBack" onclick="hideDetail()">
@@ -399,7 +424,7 @@
 
 <script>
 // ════════════════════════════════════════
-// DATA — each stop has optional `detail` from the Word itinerary
+// DATA — BACKUP VERSION: Day 2 & Day 3 swapped for rain contingency
 // ════════════════════════════════════════
 const DAYS = [
   {
@@ -419,7 +444,7 @@ const DAYS = [
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport+KIX",
         detail:{
           addr:"關西國際機場 第一航廈",
-          text:["長榮 BR132 直飛大阪，飛行時間 2h40m。建議 06:30 抵達桃園機場。","通關、領行李預估 45–60 分鐘。建議先在機場購買/充值 ICOCA 卡。","搭乘南海電鐵 Rapi:t 到難波站（約 38 分鐘，¥1,290）。"],
+          text:["長榮 BR132 直飛大阪，飛行時間 2h40m。建議 06:30 抵達桃園機場。","通關、領行李預估 45–60 分鐘。建議先在機場購買/充值 ICOCA 卡。","已預約 13:35 南海電鐵 Rapi:t（有指定席）。KIX 出發 13:35 → 難波站 14:13（38 分鐘，¥1,350/人）。"],
           tips:["訂位代號：旅伴A *** ｜ 旅伴B *** ｜ 旅伴C ***"],
           backup:"若 Rapi:t 客滿，可搭南海空港急行（約 45 分鐘，¥930）",
           rapit:{
@@ -447,9 +472,9 @@ const DAYS = [
           }
         },
         nextTransport:{ mode:"train", icon:"🚃", label:"南海電鐵 Rapi:t 特急",
-          detail:"南海電鐵 Rapi:t 特急，KIX → 難波站，全車對號入座（建議提前線上購票）",
+          detail:"南海電鐵 Rapi:t 特急，13:35 KIX 出發 → 14:13 難波站抵達（已預約指定席）",
           duration:"38 分鐘", cost:"¥1,350/人（提前購票）", modeClass:"t-mode-train" }},
-      { time:"13:00", zh:"難波站", en:"Namba Station", lat:34.6656, lng:135.5013,
+      { time:"14:13", zh:"難波站", en:"Namba Station", lat:34.6656, lng:135.5013,
         desc:"抵達南海難波站 3F。從南出口出站", type:"transport",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Namba+Station+%E9%9B%A3%E6%B3%A2%E9%A7%85+Osaka",
         detail:{
@@ -459,7 +484,7 @@ const DAYS = [
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
           detail:"南海難波站南出口→沿御堂筋方向南行",
           duration:"步行 7 分鐘 (500m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"13:15", zh:"東橫INN 難波", en:"Toyoko Inn Namba", lat:34.6610, lng:135.4985,
+      { time:"14:20", zh:"東橫INN 難波", en:"Toyoko Inn Namba", lat:34.6610, lng:135.4985,
         desc:"寄放行李（或16:00後入住）。稍作休息後出發", type:"hotel",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Osaka+Namba+%E6%9D%B1%E6%A8%AAINN",
         detail:{
@@ -506,7 +531,10 @@ const DAYS = [
             {n:"福太郎 本店",e:"Fukutaro Honten (Okonomiyaki/Negiyaki)",c:"大阪燒·蔥燒名店 ｜ Tabelog 3.70 ｜ ¥2,000–3,000/人｜招牌「すじねぎ焼」牛筋蔥燒必點",u:"https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E5%A4%AA%E9%83%8E+%E6%9C%AC%E5%BA%97+%E5%8D%83%E6%97%A5%E5%89%8D+Osaka"},
             {n:"元祖串かつ だるま 法善寺店",e:"Daruma Kushikatsu Hozenji",c:"昭和4年(1929)創業串炸元祖 ｜ ¥2,000–3,000/人｜招牌「どて焼き」味噌牛筋煮＋串炸套餐",u:"https://www.google.com/maps/search/?api=1&query=%E3%81%A0%E3%82%8B%E3%81%BE+%E6%B3%95%E5%96%84%E5%AF%BA+Daruma+Hozenji+Osaka"},
             {n:"法善寺 三平",e:"Hozenji Sanpei (Okonomiyaki)",c:"法善寺橫丁內大阪燒老舖 ｜ Tabelog 3.44 ｜ ¥1,500–2,500/人｜鐵板前座位有氣氛",u:"https://www.google.com/maps/search/?api=1&query=%E6%B3%95%E5%96%84%E5%AF%BA+%E4%B8%89%E5%B9%B3+Hozenji+Sanpei+Osaka"},
-            {n:"六覺燈",e:"Rokkakutei (Premium Kushiage)",c:"創作串揚名店·1980年創業 ｜ Tabelog 3.69 ｜ ¥10,000–15,000/人｜旬食材高級串揚套餐·木質典雅空間（適合慶祝）",u:"https://www.google.com/maps/search/?api=1&query=%E5%85%AD%E8%A6%BA%E7%87%88+Rokkakutei+Osaka"}
+            {n:"六覺燈",e:"Rokkakutei (Premium Kushiage)",c:"創作串揚名店·1980年創業 ｜ Tabelog 3.69 ｜ ¥10,000–15,000/人｜旬食材高級串揚套餐·木質典雅空間（適合慶祝）",u:"https://www.google.com/maps/search/?api=1&query=%E5%85%AD%E8%A6%BA%E7%87%88+Rokkakutei+Osaka"},
+            {n:"天ぷら天善",e:"Tempura Tenzen",c:"道頓堀附近天婦羅名店 ｜ ¥3,000–6,000/人｜炸蝦·野菜天婦羅套餐，清爽不油膩，長輩友善",u:"https://www.google.com/maps/search/?api=1&query=Tempura+Tenzen+%E5%A4%A9%E3%81%B7%E3%82%89%E5%A4%A9%E5%96%84+Osaka+Dotonbori"},
+            {n:"神戶牛 和之宮 東方飯店店",e:"Kobe Beef Wanomiya",c:"神戶牛燒肉·頂級和牛 ｜ ¥6,000–12,000/人｜步行3分鐘可達，適合第一晚犒賞自己",u:"https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E6%88%B8%E7%89%9B+%E5%92%8C%E4%B9%8B%E5%AE%AE+%E6%9D%B1%E6%96%B9%E9%A3%AF%E5%BA%97+Osaka"},
+            {n:"味樂館 鐵板燒 Hikari",e:"Teppanyaki Hikari (Namba)",c:"難波站步行3分鐘(ナンバウォーク16番出口)·地下B1F鐵板燒 ｜ ¥4,000–8,000/人｜現場鐵板烹調，視覺享受",u:"https://www.google.com/maps/search/?api=1&query=%E5%91%B3%E6%A5%BD%E9%A4%A8+%E9%90%B5%E6%9D%BF%E7%87%92+Hikari+Namba+Osaka"}
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
@@ -516,30 +544,31 @@ const DAYS = [
   },
   {
     id:2, label:"Day 2", date:"4/9 (四)", color:"#FF9800",
-    title:"奈良東大寺·鹿公園·佐保川櫻花·三笠旅館", titleEn:"Todaiji, Deer Park, Sahogawa & Mikasa",
-    center:[34.685,135.840], zoom:14,
+    title:"若草山·春日大社·うな菊·奈良町·三笠旅館", titleEn:"Wakakusayama, Kasuga, Unagiku & Naramachi",
+    center:[34.681,135.842], zoom:14,
     budget:[
       ["近鐵難波→奈良 ×3人","¥2,040"],
-      ["鹿仙貝 ×3份","¥600"],
-      ["東大寺入場 ×3人","¥1,800"],
-      ["志津香釜飯午餐 ×3人","¥3,900–5,400"],
+      ["若草山入場 ×3人","¥450"],
+      ["春日大社本殿 ×3人","¥1,500"],
+      ["うな菊午餐 ×3人","¥10,500–19,500"],
+      ["奈良町飲品","¥1,500–3,000"],
       ["三笠旅館住宿（含晚餐早餐·2晚）","¥159,900"],
-      ["小計 (3人)","¥168,240–169,740"]
+      ["小計 (3人)","¥175,890–186,390"]
     ],
     stops: [
-      { time:"08:30", zh:"難波站 出發", en:"Depart Namba", lat:34.6656, lng:135.5013,
-        desc:"攜帶2個行李箱步行7分鐘至近鐵難波站（地下3F）", type:"transport",
+      { time:"08:30", zh:"難波出發", en:"Depart Namba (Kintetsu)", lat:34.6656, lng:135.5013,
+        desc:"近鐵快速急行，¥680/人。攜帶行李箱步行7分鐘至近鐵難波站地下3F", type:"transport",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Kintetsu+Namba+Station+%E8%BF%91%E9%89%84%E9%9B%A3%E6%B3%A2%E9%A7%85",
         detail:{
-          addr:"東橫INN大阪難波",
-          text:["退房後攜帶 2 個行李箱，步行7分鐘至近鐵難波站（地下3F）。","從難波搭近鐵奈良線快速急行到近鐵奈良站（約 40 分鐘，¥680/人）。","到站後先將行李放入站內置物櫃（大型¥700），10:00後再送至站前三笠案內所。"],
-          tips:["🧳 行李放置：近鐵快速急行車廂內無專用行李架。建議選擇「車廂最前端或最後端」座位，將行李箱放在座位後方空間或車門旁角落。新型車輛（8A系）中間車門旁設有「やさしば Free Space」多功能區域，附輪擋裝置，專為行李箱/嬰兒車設計，優先選擇此區域。","🎫 搭車方式：Suica 卡直接刷卡進站即可！快速急行屬「一般列車」，無需另購特急券，Suica/ICOCA 直接感應閘機扣款 ¥680。","🚉 月台指引：近鐵難波站位於地下 3F。從南海難波站往東步行約 7 分鐘，沿指標找「近鉄（Kintetsu）」。進入閘機後，前往「奈良方面」月台。快速急行班次約每 10–15 分鐘一班，不必擔心錯過。","⚠️ 注意：不要搭「特急」列車（車身紅黃色、需另購特急券¥520），請搭「快速急行」或「急行」（免費、直達奈良、約40分鐘）。車頭/月台顯示幕會標示「快速急行 奈良」。","💺 快速急行為自由席（先到先坐），早上08:30非尖峰時段通常有座位。建議上車後往車廂前後端走，方便放置行李且較容易找到空位。","📏 近鐵行李規定：每人可攜帶 2 件，單件三邊合計 250cm 以下、重量 30kg 以下。一般行李箱均符合規定。"]
+          addr:"東橫INN大阪難波 → 近鐵難波站（地下3F）",
+          text:["退房後攜帶 2 個行李箱，步行7分鐘至近鐵難波站（地下3F）。","從難波搭近鐵奈良線快速急行到近鐵奈良站（約 40 分鐘，¥680/人）。"],
+          tips:["🎫 Suica/ICOCA 直接感應閘機扣款 ¥680。快速急行屬「一般列車」，無需另購特急券。","⚠️ 不要搭「特急」列車（需另購特急券¥520），請搭「快速急行」或「急行」。","💺 快速急行為自由席，早上08:30非尖峰時段通常有座位。"]
         },
         nextTransport:{ mode:"train", icon:"🚃", label:"近鐵奈良線 快速急行",
           detail:"近鐵奈良線 快速急行，難波→近鐵奈良（直達免轉車）",
           duration:"40 分鐘", cost:"¥680/人", modeClass:"t-mode-train" }},
       { time:"09:20", zh:"近鐵奈良站", en:"Kintetsu Nara Station", lat:34.6820, lng:135.8308,
-        desc:"先寄放行李箱至站內置物櫃，輕裝遊覽", type:"transport",
+        desc:"先寄放行李入站內置物櫃（¥700/個）；輕裝出發，15:30 奈良町結束後取行李轉送案內所", type:"transport",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Kintetsu+Nara+Station+%E8%BF%91%E9%89%84%E5%A5%88%E8%89%AF%E9%A7%85",
         detail:{
           addr:"近鐵奈良站",
@@ -547,19 +576,19 @@ const DAYS = [
             "2號出口出站。",
             "🧳 行李寄放步驟：",
             "① 到站後先將 2 個行李箱放入站內投幣置物櫃（大型 ¥700/個，站內 B1 和 1F 均有）。",
-            "② 輕裝前往佐保川賞櫻 → 奈良公園 → 東大寺 → 午餐。",
-            "③ 10:00 後經過車站時，取回行李箱送至「三笠旅館案內所」（5號出口對面）。",
-            "④ 旅館員工會將行李直接運送到山上房間，不需自己搬。",
+            "② 輕裝步行前往若草山（沿奈良公園步行 2.2km，約35分）。",
+            "③ 15:30 奈良町散步結束後，步行回近鐵奈良站取回行李箱。",
+            "④ 將行李箱送至三笠旅館案內所（5號出口對面），旅館員工直接運上山。",
             "📍 三笠旅館案內所位置：5號出口（西北出口）出站 → 過馬路信號燈 → 正前方即到。",
             "🔍 辨識方式：深綠色看板，上書「奈良 万葉若草の宿 三笠」。",
             "📮 地址：奈良市中筋町4 ｜ ☎ 0742-22-5394",
             "🕐 案內所營業時間：10:00–18:00（行李寄放服務）"
           ],
           tips:[
-            "💡 因案內所 10:00 才開始收行李，建議先用站內置物櫃暫放，之後經過時再送過去",
+            "💡 行李今日全天存置物櫃（不需中途取出），15:30 奈良町後取行李→送案內所→16:00 接駁車，流程順暢",
             "🍡 站內甜點推薦：「天極堂 近鐵奈良駅店」就在站內 タイムズプレイス（Time's Place）。百年吉野本葛老舖，推薦葛切り・葛もち・葛うどん（¥800–1,500/人）。營業 10:00–19:00。建議午餐後回站送行李時順路品嚐！",
-            "免費接駁車時刻：近鐵奈良站 14:45 / 16:00 / 17:00 / 18:00",
-            "上車點：近鐵奈良站大樓對面「奈良 三笠旅館案內所」前（同寄放行李地點）"
+            "🚐 免費接駁車（近鐵奈良站發）：14:45 / 16:00 / 17:00 / 18:00（不需預約）",
+            "⚠️ 今日備案行程：若草山需晴天，此備案日已確認天氣良好方啟用"
           ],
           links:[
             {label:"📍 三笠旅館案內所 Google Maps 位置", url:"https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E7%AC%A0+%E6%A1%88%E5%86%85%E6%89%80+%E8%BF%91%E9%89%84%E5%A5%88%E8%89%AF"},
@@ -568,69 +597,164 @@ const DAYS = [
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"5號出口北行→沿大宮通往北走→約10分鐘到佐保川河堤",
-          duration:"步行 10 分鐘 (700m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"09:40", zh:"佐保川 櫻花散步", en:"Sahogawa Cherry Blossom", lat:34.6920, lng:135.8300,
-        desc:"兩岸5km櫻花道，平坦好走，適合長輩悠閒散步。推薦大宮橋～佐保橋段（800m）", type:"spot",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E4%BD%90%E4%BF%9D%E5%B7%9D+%E6%A1%9C+Sahogawa+Nara",
+          detail:"從近鐵奈良站步行穿越奈良公園往東南方向前往若草山，沿途可見鹿群",
+          duration:"步行 35 分鐘 (2.2km)", cost:"", modeClass:"t-mode-walk" }},
+      { time:"09:35", zh:"步行至若草山", en:"Walk to Wakakusayama", lat:34.6851, lng:135.8430,
+        desc:"輕裝步行穿越奈良公園（2.2km，約35分），沿途鹿群相伴。ぐるっとバス亦於10:00開始運行（¥250）", type:"spot",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF%E5%85%AC%E5%9C%92+Nara+Park",
         detail:{
-          addr:"佐保川 大宮橋～佐保橋段",
-          walk:"從近鐵奈良站 5號出口步行約 10 分鐘",
-          text:["兩岸 5km 櫻花大道，平坦河堤步道，非常適合長輩悠閒散步。","🌸 4月上旬為滿開期，兩側染井吉野櫻形成夢幻隧道。","📷 推薦拍照點：大宮橋～佐保橋段（約 800m）。","建議沿河堤悠閒散步 30–40 分鐘，早晨光線柔和更適合拍照。"],
-          tips:["🪑 河堤沿岸有長椅可坐下休息賞花。","🚻 大宮通附近有公廁。"]
+          addr:"奈良公園 → 若草山入口（約2.2km）",
+          walk:"從近鐵奈良站步行約 35 分鐘",
+          text:["從近鐵奈良站5號出口出發，穿越奈良公園步行前往若草山（直行路線約2.2km）。","沿途可見悠閒的奈良鹿，非常愜意。路況平坦好走。","ぐるっとバス 10:00 開始運行（¥250，若草山麓站），可搭バス或步行，步行約35分較彈性。"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"沿佐保川往東走 → 經轉害門（東大寺北門）直接進入東大寺",
-          duration:"步行 20 分鐘 (1.3km)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"10:30", zh:"東大寺 大佛殿", en:"Todaiji Temple", lat:34.6890, lng:135.8398,
-        desc:"世界最大木造建築，大佛高15m。門票¥600/人", type:"spot",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=Todaiji+Temple+%E6%9D%B1%E5%A4%A7%E5%AF%BA+Nara",
+          detail:"穿越奈良公園繼續東行至若草山入口",
+          duration:"步行 35 分鐘 (2.2km)", cost:"", modeClass:"t-mode-walk" }},
+      { time:"10:10", zh:"若草山 登山", en:"Wakakusayama Hill", lat:34.6830, lng:135.8510,
+        desc:"¥150/人，9:00–17:00開放。長輩爬至一重目（20分鐘），視野絕佳。全程約80分鐘含休息", type:"spot",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Mt+Wakakusa+%E8%8B%A5%E8%8D%89%E5%B1%B1+Nara",
         detail:{
-          addr:"406-1 Zoshicho, Nara, 630-8211",
-          walk:"從佐保川步行約 20 分鐘（沿河堤往東→轉害門進入東大寺境内）",
-          text:["世界最大木造建築、奈良大佛（高15m）。入場費 ¥600/人。","從轉害門（北側）進入，經鏡池前往大佛殿。","預計參觀約 50–60 分鐘。"],
-          tips:["🪑 長輩可在鏡池畔旁的長椅休息。園內設有無障礙步道。","💡 轉害門是東大寺的北門，遊客較少，從佐保川過來最順路。"]
-        },
-        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"從東大寺南大門往南走→進入奈良公園鹿群區域",
-          duration:"步行 5 分鐘 (300m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"11:40", zh:"奈良公園·鹿互動", en:"Nara Park & Deer", lat:34.6851, lng:135.8430,
-        desc:"購買鹿仙貝¥200餵鹿。注意：鹿很主動，留意包包！", type:"spot",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=Nara+Park+%E5%A5%88%E8%89%AF%E5%85%AC%E5%9C%92",
-        detail:{
-          addr:"奈良公園一帶（東大寺南大門前方）",
-          walk:"從東大寺南大門出來即到",
-          text:["從東大寺南大門出來，公園裡到處都有鹿群。","購買鹿仙貝 ¥200 與可愛小鹿互動拍照。","約 15–20 分鐘互動後，沿登大路通往西走向志津香。"],
-          tips:["長輩注意：鹿會主動靠近搶食，留意包包和手上物品。","🪑 公園內長椅多，隨時可休息。"]
-        },
-        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"沿登大路通往西走→興福寺旁即到志津香",
-          duration:"步行 8 分鐘 (500m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"12:00", zh:"午餐：志津香 釜飯 公園店", en:"Lunch: Shizuka Kamameshi", lat:34.6832, lng:135.8325,
-        desc:"奈良名物釜飯老舖。每鍋現點現做，¥1,300–1,800/人。建議11:30前取號", type:"meal",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%BF%97%E6%B4%A5%E9%A6%99+%E9%87%9C%E9%A3%AF+%E5%85%AC%E5%9C%92%E5%BA%97+Shizuka+Nara",
-        detail:{
-          addr:"59 Noboriojicho, Nara, 630-8213（興福寺旁、登大路通沿い）",
-          walk:"從奈良公園步行約 8 分鐘（沿登大路通往西→興福寺旁）",
-          text:["奈良名物釜飯老舖，每鍋現點現做，使用當季食材。","招牌「七種釜めし」（七種釜飯）¥1,300、「奈良七種釜めし」¥1,620。","每鍋約需等候 20–30 分鐘現做，但味道值得等待。","位於登大路通上、興福寺旁，地理位置絕佳。","預算約¥1,300–1,800/人"],
-          tips:["⏰ 櫻花季（4月上旬）排隊可達 40–60 分鐘！強烈建議 11:30 前到店取號。","💡 取號後可在附近興福寺、猿沢池散步等候，店家會電話通知。","🪑 有桌椅座位，長輩友善。"],
-          alts:[
-            {n:"うな菊 奈良本店",e:"Unagiku Nara Honten (Unagi)",c:"菊水樓別館·130年醬汁傳承·正統江戶前鰻魚 ｜ ¥3,500–6,500/人｜建議線上預約 11:30–12:00",u:"https://www.google.com/maps/search/?api=1&query=%E3%81%86%E3%81%AA%E8%8F%8A+%E5%A5%88%E8%89%AF%E6%9C%AC%E5%BA%97+Unagiku+Nara"},
-            {n:"天極堂 奈良本店",e:"Tengyokudo (Kuzu Arrowroot)",c:"葛粉料理·奈良名物 ｜ ¥2,000–3,500/人",u:"https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E6%A5%B5%E5%A0%82+%E5%A5%88%E8%89%AF%E6%9C%AC%E5%BA%97"},
-            {n:"ゐざさ茶屋 東大寺前",e:"Izasa Chaya (Persimmon Leaf Sushi)",c:"柿葉壽司·素麵 ｜ ¥2,500–4,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E3%82%90%E3%81%96%E3%81%95%E8%8C%B6%E5%B1%8B+%E6%9D%B1%E5%A4%A7%E5%AF%BA+Nara"}
+          addr:"若草山入口（南門或北門），近春日大社側",
+          walk:"全程往返約 1.5–2 小時（含休息拍照）",
+          text:[
+            "從春日大社側入口進入若草山。入場費 ¥150/人（小童 ¥80）。",
+            "開放時間：09:00–17:00 ｜ 開山期間：3月第3個週六 ~ 12月第2個週日。",
+            "海拔 342m，山形圓滑、草地平緩，適合全年齡層。",
+            "📍 有南門・北門兩個入口（均可入山），建議從南門進入（離春日大社較近）。",
+            "🥾 路線說明：",
+            "　 南門路線 — 開闊草坡，階梯較陡但視野好，適合天氣晴朗時",
+            "　 北門路線 — 先走階梯再進林間步道，夏天較涼爽",
+            "　 兩條路線在一重目匯合",
+            "⛰ 一重目（約 15–20 分鐘）：即可俯瞰奈良全景、東大寺、五重塔。設有展望台與長椅可休息。長輩建議到此即可。",
+            "⛰ 二重目（再 15 分鐘）：視野更開闊，可遠眺生駒山。注意：此段為泥土坡，雨後較滑。",
+            "⛰ 山頂/三重目（再 10 分鐘）：342m，設有鶯塚古墳（5世紀古墳）。",
+            "★ 山腰櫻花比市區晚開 3–5 天，4月上旬應正是最佳觀賞期！",
+            "⚠️ 重要提醒：山上無遮蔽處，此行程僅在天氣晴朗時啟用。草坡濕滑，雨天禁止登山。"
+          ],
+          tips:[
+            "👟 建議穿好走的運動鞋（草坡雨後會滑）",
+            "💧 山上無販賣機，請自備水壺（帶水）",
+            "🌧 山上無遮蔽處，雨天建議改行程（此備案版 Day 2 已確認晴天啟用）",
+            "🎫 當日票根可重複入場（半券提示即可）",
+            "👴 長輩走到一重目或二重目即可（約 15–25 分鐘），下山較輕鬆",
+            "📸 山腰櫻花此時應正盛開，是絕佳拍照點！",
+            "⚠️ 下坡注意：草坡段請走階梯不要走草地，石板路注意苔蘚濕滑"
+          ],
+          links:[
+            {label:"若草山 登山路線圖與詳細說明", url:"https://www.chinmasa.com/blog/entry-503047/"},
+            {label:"若草山 YAMAP 登山地圖", url:"https://yamap.com/mountains/6834"}
           ]
         },
-        nextTransport:{ mode:"walk", icon:"🚶→🚐", label:"徒步 → 散步回車站",
-          detail:"午餐後往西步行 5 分鐘回近鐵奈良站→順路取行李箱送至三笠案內所（5號出口對面）→搭14:45接駁車上山",
-          duration:"步行5分 + 等候接駁", cost:"接駁免費", modeClass:"t-mode-walk" }},
-      { time:"14:45", zh:"三笠旅館 Check-in", en:"Mikasa Ryokan", lat:34.6833, lng:135.8520,
-        desc:"月之棟和室10疊。入住後享受溫泉、觀景休息", type:"hotel",
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步（下山）",
+          detail:"若草山南門下山→沿「春日大社表參道石燈籠路」林蔭石板路往南（800m，15分，平緩下坡）",
+          duration:"步行 15 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"11:30", zh:"春日大社表參道石燈籠路", en:"Kasuga Grand Shrine Approach", lat:34.6812, lng:135.8499,
+        desc:"從若草山南門出，步行15分沿800m石燈籠林蔭石板路（下坡）至春日大社", type:"spot",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Kasuga+Taisha+%E6%98%A5%E6%97%A5%E5%A4%A7%E7%A4%BE+Nara",
+        detail:{
+          addr:"160 Kasuganocho, Nara, 630-8212",
+          walk:"從若草山南門步行約 15 分鐘（下坡石板路）",
+          text:["從若草山南門出→右轉沿林蔭石板路往南→沿途有石燈籠標示方向→約 800m 即達春日大社參道入口。","世界遺產，著名的千盞石燈籠參道。免費參觀（本殿特別參拜 ¥500）。","原始林中的參道非常安靜，適合慢步。約30分鐘參觀。"]
+        },
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
+          detail:"往西→經奈良公園→興福寺旁。うな菊在菊水樓別館（10分鐘）",
+          duration:"步行 10 分鐘 (700m)", cost:"", modeClass:"t-mode-walk" }},
+      { time:"11:45", zh:"春日大社", en:"Kasuga Grand Shrine", lat:34.6812, lng:135.8499,
+        desc:"世界遺產，石燈籠參道。本殿特別參拜¥500/人。約30分鐘", type:"spot",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Kasuga+Taisha+%E6%98%A5%E6%97%A5%E5%A4%A7%E7%A4%BE+Nara",
+        detail:{
+          addr:"160 Kasuganocho, Nara, 630-8212",
+          walk:"從若草山入口步行約 15 分鐘（石板參道）",
+          text:["從若草山下來後順路參訪，不需繞路。","世界遺產，著名的千盞石燈籠參道。免費參觀（本殿特別參拜 ¥500/人）。","原始林中的參道非常安靜，適合慢步。約30分鐘。"],
+          tips:["🚌 若長輩腳力疲憊，參觀後可搭 ぐるっとバス（¥250，約20分一班，10:00–17:00）往奈良公園/近鐵奈良方向，省去往西步行體力"]
+        },
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步往西",
+          detail:"往西→經奈良公園→興福寺旁，うな菊在菊水樓別館",
+          duration:"步行 10 分鐘 (700m)", cost:"", modeClass:"t-mode-walk" }},
+      { time:"12:15", zh:"步行至うな菊", en:"Walk to Unagiku", lat:34.6808, lng:135.8390,
+        desc:"從春日大社往西10分鐘穿越公園至うな菊", type:"transport",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E3%81%86%E3%81%AA%E8%8F%8A+%E5%A5%88%E8%89%AF%E6%9C%AC%E5%BA%97+Unagiku+Nara",
+        detail:{
+          addr:"奈良公園 → うな菊（1130 Takabatake-cho）",
+          walk:"從春日大社步行約 10 分鐘",
+          text:["從春日大社往西穿越奈良公園步行至うな菊（菊水樓別館）。","路況輕鬆，沿途奈良公園美景相伴。"]
+        },
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
+          detail:"步行至うな菊",
+          duration:"步行 10 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"12:25", zh:"午餐：うな菊 奈良本店", en:"Lunch: Unagiku Nara (Unagi)", lat:34.6804, lng:135.8365,
+        desc:"⚠️ 備案提醒：うな菊尚未訂位，啟用前請先確認 4/9 有位並完成預約！菊水樓別館，130年醬汁，¥3,500–6,500/人", type:"meal",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E3%81%86%E3%81%AA%E8%8F%8A+%E5%A5%88%E8%89%AF%E6%9C%AC%E5%BA%97+Unagiku+Nara",
+        detail:{
+          addr:"1130 Takabatake-cho, Nara, 630-8301",
+          walk:"從春日大社步行約 10 分鐘（近興福寺）",
+          text:["⚠️ 重要：うな菊尚未完成訂位。啟用此備案前請先確認 4/9 是否有位並完成預約（賞櫻旺季請提早行動）。","菊水樓別館改裝的正統江戶前鰻魚專門店，130年歷史醬汁傳承。","使用國產活鰻，搭配新潟魚沼越光米。傳統和室建築，適合長輩。","建議預約（可線上預約）。推薦：うな重（鰻魚重）。","預算約¥3,500–6,500/人","線上預約：https://booking.ebica.jp/webrsv/search/e014091301/27122"],
+          tips:["⏰ 強烈建議線上預約 12:00–12:30 時段，免排隊直接入座。未預約則建議 11:30 前到場，午餐尖峰 12:00–13:00 等候可達 30–45 分鐘。"],
+          backup:"備用：附近的天極堂奈良本店（葛粉料理）或志津香釜飯（排隊取號）"
+        },
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步南",
+          detail:"往南走→奈良町（經猿沢池）約5分鐘",
+          duration:"步行 5 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"14:00", zh:"奈良町漫步", en:"Naramachi Stroll", lat:34.6770, lng:135.8320,
+        desc:"同原Day3行程。格子の家·庚申堂·元興寺·大佛布丁·ロクメイコーヒー", type:"spot",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Naramachi+%E3%81%AA%E3%82%89%E3%81%BE%E3%81%A1+Nara",
+        detail:{
+          addr:"奈良町 Naramachi 區域（猿沢池以南）",
+          walk:"從うな菊步行約 5 分鐘（經猿沢池）",
+          text:[
+            "江戶時代町家風情、狹窄巷弄散步。氣氛悠閒，人潮不多。","⏱️ 今日奈良町約 90 分鐘，優先順序：格子の家 → 元興寺 → ロクメイコーヒー（庚申堂可順路，元興寺可彈性跳過）",
+            "🏛️ 著名建築與景點：",
+            "① 奈良町格子の家 — 復原傳統町家建築（免費入場）。格子窗、坪庭、通り庭完整展示江戶商家格局。9:00–17:00。",
+            "② 庚申堂 — 奈良町地標。紅色「身代わり猿」（替身猴偶）掛滿堂前，祈福消災。可購小猿偶紀念品。",
+            "③ 元興寺 — 世界遺產。飛鳥時代創建，日本最古老的寺院之一。入場 ¥500。",
+            "④ 奈良町資料館 — 免費小博物館，展示奈良町歷史與庚申信仰。",
+            "🍵 甜點·咖啡推薦：",
+            "• 大佛布丁 本店 — 奈良人氣布丁！瓶身印大佛插畫。招牌原味、抹茶口味。¥400/個",
+            "• ロクメイコーヒー奈良店 — 奈良町內精品咖啡名店。自家烘焙單品豆、手沖咖啡。¥700–1,200/人。"
+          ],
+          tips:[
+            "⏰ 大佛布丁本店建議 14:30 前到，熱門口味下午常售罄",
+            "☕ ロクメイコーヒー奈良町店下午人潮較少，散步後喝咖啡的好去處",
+            "🪑 奈良町步道平坦好走，適合長輩",
+            "⏰ 注意：15:30 要趕往近鐵奈良站搭接駁車，請控制時間"
+          ],
+          links:[
+            {label:"🏠 格子の家（町家建築）", url:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF%E7%94%BA%E6%A0%BC%E5%AD%90%E3%81%AE%E5%AE%B6+Koshi+no+Ie+Nara"},
+            {label:"🐒 庚申堂", url:"https://www.google.com/maps/search/?api=1&query=%E5%BA%9A%E7%94%B3%E5%A0%82+%E5%A5%88%E8%89%AF%E7%94%BA+Koshindo+Nara"},
+            {label:"⛩ 元興寺（世界遺產）", url:"https://www.google.com/maps/search/?api=1&query=%E5%85%83%E8%88%88%E5%AF%BA+Gangoji+Nara"},
+            {label:"🍮 大佛布丁 本店", url:"https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E4%BB%8F%E3%83%97%E3%83%AA%E3%83%B3+%E6%9C%AC%E5%BA%97+16+Kasuganocho+Nara"},
+            {label:"☕ ロクメイコーヒー奈良店", url:"https://www.google.com/maps/search/?api=1&query=%E3%83%AD%E3%82%AF%E3%83%A1%E3%82%A4%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC+%E5%A5%88%E8%89%AF%E7%94%BA"}
+          ]
+        },
+        nextTransport:{ mode:"walk", icon:"🚶→🚐", label:"徒步 → 接駁車",
+          detail:"步行北12分至近鐵奈良站→取行李箱送至三笠案內所（5號出口對面）→搭16:00接駁車上山",
+          duration:"步行12分 + 接駁15分", cost:"接駁免費", modeClass:"t-mode-walk" }},
+      { time:"15:30", zh:"近鐵奈良站 → 取行李 → 三笠案內所候車", en:"Kintetsu Nara → Retrieve Luggage → Mikasa Annaisho Shuttle", lat:34.6820, lng:135.8308,
+        desc:"奈良町後步行12分回近鐵奈良站，取出置物櫃行李→送至5號出口對面三笠案內所→16:00接駁車上山", type:"transport",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Kintetsu+Nara+Station+%E8%BF%91%E9%89%84%E5%A5%88%E8%89%AF%E9%A7%85",
+        detail:{
+          addr:"近鐵奈良站 → 三笠旅館案內所（5號出口對面）",
+          text:["從奈良町步行約12分鐘回近鐵奈良站。","取出站內置物櫃行李（¥700/個，B1或1F），送至5號出口對面三笠旅館案內所。","旅館員工將行李直接運送到山上房間，不需自己搬。","搭 16:00 接駁車上山（不搭14:45，因需要奈良町漫步時間）。"],
+          tips:[
+            "🚐 接駁班次：14:45 / 16:00 / 17:00 / 18:00（5號出口對面案內所前上車，不需預約）",
+            "⚠️ 今日選擇 16:00 班次，請在 15:45 前抵達候車點"
+          ]
+        },
+        nextTransport:{ mode:"shuttle", icon:"🚐", label:"三笠旅館 接駁車",
+          detail:"16:00班次從三笠案內所出發上山（5號出口對面）",
+          duration:"接駁 15 分鐘", cost:"免費", modeClass:"t-mode-shuttle" }},
+      { time:"16:00", zh:"三笠旅館 Check-in", en:"Mikasa Ryokan Check-in", lat:34.6833, lng:135.8520,
+        desc:"搭16:00接駁車（非14:45，因需奈良町時間）。月之棟和室10疊，含懷石晚餐", type:"hotel",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF+%E4%B8%89%E7%AC%A0+Mikasa+Ryokan+Nara",
         detail:{
           addr:"728-10 Kawakamicho, Nara-shi, 630-8202",
           walk:"接駁車約 15 分鐘到旅館",
-          text:["返回近鐵奈良站搭 14:45 接駁車（或 16:00 班次）。","入住後享受溫泉、觀景，然後用「萬葉會席」晚餐。","含彩色浴衣租借特典。","訂單資訊請見私人版本"],
-          tips:["若長輩較累，可在站前休息等候，或搭計程車（約¥2,000）。"],
+          text:["搭16:00接駁車上山（5號出口對面三笠案內所出發）。","入住後享受溫泉、觀景，然後用「萬葉會席」晚餐。","含彩色浴衣租借特典。"],
+          tips:[
+            "🚐 近鐵奈良→旅館：14:45 / 16:00 / 17:00 / 18:00（不需預約，5號出口對面案內所前上車）",
+            "今日選擇 16:00 班次（因需要奈良町漫步時間）",
+            "若長輩較累，可在站前休息等候，或搭計程車（約¥2,000）。"
+          ],
           links:[
             {label:"🏨 三笠旅館官網（設施·服務·溫泉）",url:"https://www.miyakohotels.ne.jp/mikasa/"},
             {label:"🛁 客室介紹（月之棟和室）",url:"https://www.miyakohotels.ne.jp/mikasa/sp/rooms/"},
@@ -649,29 +773,29 @@ const DAYS = [
   },
   {
     id:3, label:"Day 3", date:"4/10 (五)", color:"#4CAF50",
-    title:"若草山·うな菊·奈良町", titleEn:"Wakakusayama & Naramachi",
-    center:[34.681,135.842], zoom:14,
+    title:"東大寺·奈良公園·志津香·奈良町 ☔雨天備案", titleEn:"Todaiji, Deer Park, Shizuka & Naramachi – Rain Day",
+    center:[34.685,135.840], zoom:14,
     budget:[
-      ["若草山入場 ×3人","¥450"],
-      ["春日大社本殿參拜 ×3人","¥1,500"],
-      ["うな菊鰻魚午餐 ×3人","¥10,500–19,500"],
+      ["若草山入場","¥0 (跳過)"],
+      ["東大寺入場 ×3人","¥1,800"],
+      ["志津香釜飯 ×3人","¥3,900–5,400"],
       ["奈良町甜點/飲品","¥1,500–3,000"],
       ["旅館住宿（已含在Day2）","—"],
-      ["小計 (3人)","¥13,950–24,450"]
+      ["小計 (3人)","¥7,200–10,200"]
     ],
     stops: [
-      { time:"08:30", zh:"旅館早餐·出發", en:"Breakfast & Depart", lat:34.6833, lng:135.8520,
-        desc:"旅館早餐後搭接駁車下山", type:"hotel",
+      { time:"08:30", zh:"旅館早餐·出發", en:"Breakfast & Depart (Shuttle)", lat:34.6833, lng:135.8520,
+        desc:"旅館早餐後搭接駁車下山。下山班次：8:00/8:40/9:20/10:00/10:40", type:"hotel",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF+%E4%B8%89%E7%AC%A0+Mikasa+Ryokan",
         detail:{
           addr:"奈良三笠日式旅館",
-          text:["在旅館用完和定食早餐後，搭接駁車下山。","建議攜帶水壺、帽子、防曬用品。"],
+          text:["在旅館用完和定食早餐後，搭接駁車下山至近鐵奈良站。","☔ 今日為雨天備案，行程均為室內景點，放心出發！","建議攜帶雨傘、防水外套。"],
           tips:[
             "🚐 接駁車從旅館大廳（ロビー前）發車，不需提前預約",
             "⏰ 下山班次：8:00 / 8:40 / 9:20 / 10:00 / 10:40",
             "💡 建議前一晚告知櫃台搭乘時間，方便旅館安排",
-            "📍 可請司機在若草山入口（春日野園地）放你們下車，不需坐到近鐵奈良站",
-            "🕐 回程接駁（近鐵奈良站→旅館）：14:45 / 16:00 / 17:00 / 18:00，不需預約"
+            "🕐 回程（近鐵奈良→旅館）：14:45 / 16:00 / 17:00 / 18:00（不需預約）",
+            "⚠️ 班次可能因當日狀況調整，請保留彈性"
           ],
           links:[
             {label:"三笠旅館 官方網站", url:"https://www.miyakohotels.ne.jp/mikasa/"},
@@ -679,125 +803,133 @@ const DAYS = [
           ]
         },
         nextTransport:{ mode:"shuttle", icon:"🚐", label:"旅館接駁車",
-          detail:"接駁車至若草山山腳入口（春日野園地）｜班次：8:00 / 8:40 / 9:20",
+          detail:"接駁車下山至近鐵奈良站前｜班次：8:00 / 8:40 / 9:20",
           duration:"接駁 8 分鐘", cost:"免費", modeClass:"t-mode-shuttle" }},
-      { time:"09:00", zh:"若草山 登山", en:"Wakakusayama Hill", lat:34.6830, lng:135.8510,
-        desc:"爬至一重目（20分鐘）即有絕佳全景。¥150/人。長輩到一重目即可", type:"spot",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=Mt+Wakakusa+%E8%8B%A5%E8%8D%89%E5%B1%B1+Nara",
+      { time:"09:20", zh:"近鐵奈良站", en:"Kintetsu Nara Station", lat:34.6820, lng:135.8308,
+        desc:"接駁車抵達近鐵奈良站，步行北行往佐保川方向", type:"transport",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Kintetsu+Nara+Station+%E8%BF%91%E9%89%84%E5%A5%88%E8%89%AF%E9%A7%85",
         detail:{
-          addr:"若草山入口（南門或北門），近春日大社側",
-          walk:"全程往返約 1.5–2 小時（含休息拍照）",
-          text:[
-            "從春日大社側入口進入若草山。入場費 ¥150/人（小童 ¥80）。",
-            "開放時間：09:00–17:00 ｜ 開山期間：3月第3個週六 ~ 12月第2個週日。",
-            "海拔 342m，山形圓滑、草地平緩，適合全年齡層。",
-            "📍 有南門・北門兩個入口（均可入山），建議從南門進入（離春日大社較近）。",
-            "🥾 路線說明：",
-            "　 南門路線 — 開闊草坡，階梯較陡但視野好，適合天氣晴朗時",
-            "　 北門路線 — 先走階梯再進林間步道，夏天較涼爽",
-            "　 兩條路線在一重目匯合",
-            "⛰ 一重目（約 15–20 分鐘）：即可俯瞰奈良全景、東大寺、五重塔。設有展望台與長椅可休息。",
-            "⛰ 二重目（再 15 分鐘）：視野更開闊，可遠眺生駒山。注意：此段為泥土坡，雨後較滑。",
-            "⛰ 山頂/三重目（再 10 分鐘）：342m，設有鶯塚古墳（5世紀古墳），天氣好可見京都方向。",
-            "★ 山腰櫻花比市區晚開 3–5 天，4月上旬應正是最佳觀賞期！"
-          ],
-          tips:[
-            "👟 建議穿好走的運動鞋（草坡雨後會滑）",
-            "👕 建議穿長袖長褲（防蚊蟲、草叢）",
-            "💧 山上無販賣機，請自備水壺",
-            "🌧 山上無遮蔽處，雨天建議改行程",
-            "🎫 當日票根可重複入場（半券提示即可）",
-            "👴 建議長輩走到一重目或二重目即可（約 15–25 分鐘），下山較輕鬆",
-            "📸 山腰櫻花此時應正盛開，是絕佳拍照點！",
-            "🚶 下山路線指引：從南門出→右轉沿林蔭石板路往南→沿途有石燈籠標示方向→約 800m 即達春日大社參道入口",
-            "⚠️ 下坡注意：草坡段請走階梯不要走草地（尤其露水未乾時較滑），石板路注意苔蘚濕滑"
-          ],
-          backup:"若體力不佳，可搭「ぐるっとバス」若草山麓ルート（¥250/人，每 20 分鐘一班，10:00–17:00 運行，4月櫻花季平日也有班次）。巴士從近鐵奈良站出發，停靠若草山麓。",
-          links:[
-            {label:"若草山 登山路線圖與詳細說明", url:"https://www.chinmasa.com/blog/entry-503047/"},
-            {label:"ぐるっとバス 路線·時刻表", url:"https://www.nara-access-navi.com/route/"},
-            {label:"奈良交通 ぐるっとバス 官方", url:"https://www.narakotsu.co.jp/temporary/gurutto-bus/"},
-            {label:"若草山 YAMAP 登山地圖", url:"https://yamap.com/mountains/6834"}
-          ]
+          addr:"近鐵奈良站",
+          text:["接駁車抵達近鐵奈良站前。","步行往北約10分鐘至佐保川。☔ 如大雨可略過佐保川，直接往東大寺。"]
         },
-        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步（下山）",
-          detail:"若草山南門下山→沿「春日大社表參道」林蔭石板路往南（平緩下坡）→看到石燈籠群即到春日大社",
-          duration:"步行 15 分鐘 (800m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"10:30", zh:"春日大社", en:"Kasuga Grand Shrine", lat:34.6812, lng:135.8499,
-        desc:"世界遺產，千座石燈籠參道。本殿¥500/人", type:"spot",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=Kasuga+Taisha+%E6%98%A5%E6%97%A5%E5%A4%A7%E7%A4%BE+Nara",
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步北",
+          detail:"5號出口北行→沿大宮通往北走→約10分鐘到佐保川河堤",
+          duration:"步行 10 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"09:30", zh:"佐保川 ☔可縮短", en:"Sahogawa (Rain OK: shorten/skip)", lat:34.6920, lng:135.8300,
+        desc:"☔如大雨可縮短至15分或略過，直接前往東大寺。晴天兩岸5km櫻花道，平坦好走", type:"spot",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E4%BD%90%E4%BF%9D%E5%B7%9D+%E6%A1%9C+Sahogawa+Nara",
         detail:{
-          addr:"160 Kasuganocho, Nara, 630-8212",
-          walk:"從若草山入口步行約 10 分鐘",
-          text:["從若草山下來後順路參訪，不需繞路。","世界遺產，著名的千盞石燈籠參道。免費參觀（本殿特別參拜 ¥500）。","原始林中的參道非常安靜，適合慢步。"]
+          addr:"佐保川 大宮橋～佐保橋段",
+          walk:"從近鐵奈良站 5號出口步行約 10 分鐘",
+          text:["兩岸 5km 櫻花大道，平坦河堤步道，非常適合長輩悠閒散步。","🌸 4月上旬為滿開期，兩側染井吉野櫻形成夢幻隧道。","☔ 雨天備案：如大雨可縮短至 15 分鐘體驗，或直接略過前往東大寺（室內）。","📷 推薦拍照點：大宮橋～佐保橋段（約 800m）。"],
+          tips:["🪑 河堤沿岸有長椅可坐下休息賞花。","🚻 大宮通附近有公廁。","☔ 小雨天氣帶傘可走，大雨直接略過前往東大寺。"]
         },
-        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"往西→經奈良公園→興福寺旁。うな菊在菊水樓別館",
-          duration:"步行 10 分鐘 (700m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"12:00", zh:"午餐：うな菊 奈良本店", en:"Unagiku Nara Honten (Unagi)", lat:34.6804, lng:135.8365,
-        desc:"菊水樓別館·130年醬汁傳承·正統江戶前鰻魚。建議預約。¥3,500–6,500/人", type:"meal",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E3%81%86%E3%81%AA%E8%8F%8A+%E5%A5%88%E8%89%AF%E6%9C%AC%E5%BA%97+Unagiku+Nara",
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步（轉害門）",
+          detail:"沿佐保川往東走 → 經轉害門（東大寺北門）直接進入東大寺",
+          duration:"步行 20 分鐘 (1.3km)", cost:"", modeClass:"t-mode-walk" }},
+      { time:"10:20", zh:"東大寺大仏殿", en:"Todaiji Temple ✅ 室內雨天適合", lat:34.6890, lng:135.8398,
+        desc:"✅ 室內，雨天完全適合！¥600/人，約60分鐘。從轉害門（北門）進入較少人", type:"spot",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Todaiji+Temple+%E6%9D%B1%E5%A4%A7%E5%AF%BA+Nara",
         detail:{
-          addr:"1130 Takabatake-cho, Nara, 630-8301",
-          walk:"從春日大社步行約 10 分鐘（近興福寺）",
-          text:["菊水樓別館改裝的正統江戶前鰻魚專門店，130年歷史醬汁傳承。","使用國產活鰻，搭配新潟魚沼越光米。傳統和室建築，適合長輩。","建議預約（可線上預約）。推薦：うな重（鰻魚重）。","預算約¥3,500–6,500/人","線上預約：https://booking.ebica.jp/webrsv/search/e014091301/27122"],
-          tips:["⏰ 強烈建議線上預約 11:30–12:00 時段，免排隊直接入座。未預約則建議 11:30 前到場，午餐尖峰 12:00–13:00 等候可達 30–45 分鐘。"],
-          alts:[
-            {n:"江戶川 奈良町店",e:"Edogawa Naramachi (Unagi)",c:"古民家鰻魚料理 ｜ ¥3,000–6,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E6%B1%9F%E6%88%B8%E5%B7%9D+%E5%A5%88%E8%89%AF%E7%94%BA+Edogawa+Nara"},
-            {n:"奈良町豆腐庵 こんどう",e:"Naramachi Tofu-an Kondo",c:"豆腐懷石料理 ｜ ¥2,000–3,500/人",u:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF%E7%94%BA%E8%B1%86%E8%85%90%E5%BA%B5+%E3%81%93%E3%82%93%E3%81%A9%E3%81%86+Nara"},
-            {n:"Kanakana 奈良町",e:"Kanakana (Machiya Cafe)",c:"町家和食定食 ｜ ¥1,500–2,500/人",u:"https://www.google.com/maps/search/?api=1&query=Kanakana+%E5%A5%88%E8%89%AF%E7%94%BA+Nara"}
-          ]
+          addr:"406-1 Zoshicho, Nara, 630-8211",
+          walk:"從佐保川步行約 20 分鐘（沿河堤往東→轉害門進入東大寺境内）",
+          text:["✅ 室內景點，雨天完全適合！","世界最大木造建築、奈良大佛（高15m）。入場費 ¥600/人。","從轉害門（北側）進入，經鏡池前往大佛殿。此入口遊客較少。","預計參觀約 50–60 分鐘。"],
+          tips:["🪑 長輩可在鏡池畔旁的長椅休息。園內設有無障礙步道。","💡 轉害門是東大寺的北門，遊客較少，從佐保川過來最順路。","☔ 大佛殿內部完全遮風擋雨，雨天最佳景點！"]
         },
-        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
-          detail:"往南走→奈良町（經猿沢池）",
-          duration:"步行 8 分鐘 (500m)", cost:"", modeClass:"t-mode-walk" }},
-      { time:"13:30", zh:"奈良町 漫步", en:"Naramachi Stroll", lat:34.6770, lng:135.8320,
-        desc:"町家老街。格子之家（免費）、庚申堂紅色猿偶、元興寺、雜貨小店", type:"spot",
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步（登大路通往西）",
+          detail:"從東大寺南大門往西南走→登大路通→志津香在興福寺旁，步行10分",
+          duration:"步行 10 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"11:20", zh:"志津香 取號", en:"Shizuka Kamameshi – Take a Number", lat:34.6832, lng:135.8325,
+        desc:"⚠️ 關鍵：必須在11:30前取號（櫻花季等候40-60分鐘）！取號後步行3分回奈良公園等候", type:"meal",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%BF%97%E6%B4%A5%E9%A6%99+%E9%87%9C%E9%A3%AF+%E5%85%AC%E5%9C%92%E5%BA%97+Shizuka+Nara",
+        detail:{
+          addr:"59 Noboriojicho, Nara, 630-8213（興福寺旁、登大路通沿い）",
+          walk:"從東大寺步行約 10 分鐘（沿登大路通往西→興福寺旁）",
+          text:["奈良名物釜飯老舖，每鍋現點現做，使用當季食材。","⚠️ 重要：先去取號，再回奈良公園與鹿互動等候！","招牌「七種釜めし」（七種釜飯）¥1,300、「奈良七種釜めし」¥1,620。","每鍋約需等候 20–30 分鐘現做，但味道值得等待。"],
+          tips:["⏰ 櫻花季（4月上旬）排隊可達 40–60 分鐘！強烈建議 11:30 前到店取號。","💡 取號後可在附近奈良公園與鹿互動等候，店家叫號時回來即可。","✅ 室內用餐，雨天完全適合！"]
+        },
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步東 3分",
+          detail:"取號後步行3分鐘回奈良公園等候叫號",
+          duration:"步行 3 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"11:30", zh:"奈良公園·鹿互動", en:"Nara Park & Deer (While Waiting)", lat:34.6851, lng:135.8430,
+        desc:"等候志津香叫號期間（約30-40分鐘）與鹿互動。購買鹿仙貝¥200", type:"spot",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Nara+Park+%E5%A5%88%E8%89%AF%E5%85%AC%E5%9C%92",
+        detail:{
+          addr:"奈良公園一帶（東大寺南大門前方）",
+          walk:"從志津香步行約 3 分鐘",
+          text:["在等候志津香叫號期間（約30–40分鐘），在奈良公園與鹿互動。","購買鹿仙貝 ¥200 與可愛小鹿互動拍照。","叫號時步行3分鐘回志津香入座。"],
+          tips:["長輩注意：鹿會主動靠近搶食，留意包包和手上物品。","🪑 公園內長椅多，雨天可找有屋頂的涼亭坐下等候。","☔ 雨天記得帶傘，互動時間不需太長，以免淋濕。"]
+        },
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步西 3分",
+          detail:"叫號後步行回志津香用餐",
+          duration:"步行 3 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"12:10", zh:"志津香釜飯 午餐", en:"Lunch: Shizuka Kamameshi ✅ 室內", lat:34.6832, lng:135.8325,
+        desc:"✅ 室內，雨天完全適合。現點現做¥1,300–1,800/人。奈良名物釜飯老舖", type:"meal",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%BF%97%E6%B4%A5%E9%A6%99+%E9%87%9C%E9%A3%AF+%E5%85%AC%E5%9C%92%E5%BA%97+Shizuka+Nara",
+        detail:{
+          addr:"59 Noboriojicho, Nara, 630-8213（興福寺旁、登大路通沿い）",
+          walk:"從奈良公園步行約 3 分鐘",
+          text:["✅ 室內用餐，雨天完全適合！","奈良名物釜飯老舖，每鍋現點現做，使用當季食材。","招牌「七種釜めし」（七種釜飯）¥1,300、「奈良七種釜めし」¥1,620。","每鍋約需等候 20–30 分鐘現做，但味道值得等待。","位於登大路通上、興福寺旁，地理位置絕佳。","預算約¥1,300–1,800/人"],
+          tips:["⏰ 已提前在11:30取號，叫到號直接入座。","🪑 有桌椅座位，長輩友善，室內溫暖舒適。"]
+        },
+        nextTransport:{ mode:"walk", icon:"🚶", label:"徒步南（猿沢池）",
+          detail:"往南走→猿沢池→奈良町（8分鐘）",
+          duration:"步行 8 分鐘", cost:"", modeClass:"t-mode-walk" }},
+      { time:"13:30", zh:"奈良町漫步 ✅ 多室內景點", en:"Naramachi – Mostly Indoors ✅", lat:34.6770, lng:135.8320,
+        desc:"✅ 多室內景點（格子の家·元興寺·庚申堂·大佛布丁·ロクメイコーヒー）", type:"spot",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=Naramachi+%E3%81%AA%E3%82%89%E3%81%BE%E3%81%A1+Nara",
         detail:{
           addr:"奈良町 Naramachi 區域（猿沢池以南）",
-          walk:"從うな菊步行約 5 分鐘（經猿沢池）",
+          walk:"從志津香步行約 8 分鐘（經猿沢池）",
           text:[
-            "江戶時代町家風情、狹窄巷弄散步。氣氛悠閒，人潮不多。",
-            "🏛️ 著名建築與景點：",
-            "① 奈良町格子の家 — 復原傳統町家建築（免費入場）。格子窗、坪庭、通り庭完整展示江戶商家格局。9:00–17:00。",
-            "② 庚申堂 — 奈良町地標。紅色「身代わり猿」（替身猴偶）掛滿堂前，祈福消災。可購小猿偶紀念品。",
-            "③ 元興寺 — 世界遺產。飛鳥時代創建，日本最古老的寺院之一。極樂堂屋瓦有1400年歷史行基瓦。入場 ¥500。",
-            "④ 奈良町資料館 — 免費小博物館，展示奈良町歷史與庚申信仰。門口身代わり猿群是熱門拍照點。",
-            "⑤ 奈良町にぎわいの家 — 大正時代町家建築開放參觀（免費）。內有中庭和茶室。",
-            "🍵 甜點·咖啡推薦：",
-            "• 天極堂 奈良本店 — 吉野葛粉甜品老舖。推薦葛きり、葛もち。¥800–1,200/人",
-            "• 大佛布丁 本店 — 奈良人氣布丁！瓶身印大佛插畫。招牌原味、抹茶口味。¥400/個",
-            "• Kanakana — 町家改建和食咖啡。招牌「かなかな御膳」定食。¥1,500–2,500/人",
-            "• 茶房暖暖 — 古民家風格喫茶。手作甜點和咖啡。¥800–1,500/人"
+            "江戶時代町家風情、狹窄巷弄散步。☔ 多數景點為室內，雨天非常適合！",
+            "🏛️ 著名建築與景點（✅ 均為室內）：",
+            "① 奈良町格子の家 ✅ — 復原傳統町家建築（免費入場）。格子窗、坪庭、通り庭完整展示江戶商家格局。9:00–17:00。",
+            "② 庚申堂 — 奈良町地標。紅色「身代わり猿」（替身猴偶）掛滿堂前，祈福消災。可購小猿偶紀念品。（半室外）",
+            "③ 元興寺 ✅ — 世界遺產。飛鳥時代創建，日本最古老的寺院之一。極樂堂屋瓦有1400年歷史行基瓦。入場 ¥500。",
+            "④ 奈良町資料館 ✅ — 免費小博物館，展示奈良町歷史與庚申信仰。",
+            "🍵 甜點·咖啡推薦（✅ 均為室內）：",
+            "• 大佛布丁 本店 ✅ — 奈良人氣布丁！瓶身印大佛插畫。招牌原味、抹茶口味。¥400/個",
+            "• ロクメイコーヒー奈良店 ✅ — 奈良町內精品咖啡名店。自家烘焙單品豆、手沖咖啡。¥700–1,200/人。雨天喝咖啡的好去處！"
           ],
           tips:[
             "⏰ 大佛布丁本店建議 14:00 前到，熱門口味下午常售罄",
-            "⏰ 天極堂平日下午通常免排隊",
-            "⏰ Kanakana 午餐排隊較長，14:00 後人潮減少",
-            "🪑 奈良町步道平坦好走，適合長輩。格子の家、にぎわいの家均有室內座位可休息"
+            "☕ ロクメイコーヒー奈良町店下午人潮較少，雨天坐在室內喝咖啡極為愜意",
+            "🪑 奈良町步道平坦好走，適合長輩。格子の家、にぎわいの家均有室內座位可休息",
+            "⏰ 注意：15:30 要趕往近鐵奈良站搭接駁車，請控制時間"
           ],
           links:[
             {label:"🏠 格子の家（町家建築）", url:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF%E7%94%BA%E6%A0%BC%E5%AD%90%E3%81%AE%E5%AE%B6+Koshi+no+Ie+Nara"},
             {label:"🐒 庚申堂", url:"https://www.google.com/maps/search/?api=1&query=%E5%BA%9A%E7%94%B3%E5%A0%82+%E5%A5%88%E8%89%AF%E7%94%BA+Koshindo+Nara"},
             {label:"⛩ 元興寺（世界遺產）", url:"https://www.google.com/maps/search/?api=1&query=%E5%85%83%E8%88%88%E5%AF%BA+Gangoji+Nara"},
             {label:"📖 奈良町資料館", url:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF%E7%94%BA%E8%B3%87%E6%96%99%E9%A4%A8+Naramachi+Shiryokan"},
-            {label:"🏡 にぎわいの家", url:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF%E7%94%BA%E3%81%AB%E3%81%8E%E3%82%8F%E3%81%84%E3%81%AE%E5%AE%B6"},
-            {label:"🍵 天極堂 奈良本店", url:"https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E6%A5%B5%E5%A0%82+%E5%A5%88%E8%89%AF%E6%9C%AC%E5%BA%97+1-6+Oshiagecho"},
             {label:"🍮 大佛布丁 本店", url:"https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E4%BB%8F%E3%83%97%E3%83%AA%E3%83%B3+%E6%9C%AC%E5%BA%97+16+Kasuganocho+Nara"},
-            {label:"🍽 Kanakana 奈良町", url:"https://www.google.com/maps/search/?api=1&query=Kanakana+%E5%A5%88%E8%89%AF%E7%94%BA+13+Kunodocho"},
-            {label:"☕ 茶房暖暖", url:"https://www.google.com/maps/search/?api=1&query=%E8%8C%B6%E6%88%BF%E6%9A%96%E6%9A%96+43-2+Nishinoshinyacho+Nara"}
+            {label:"☕ ロクメイコーヒー奈良店", url:"https://www.google.com/maps/search/?api=1&query=%E3%83%AD%E3%82%AF%E3%83%A1%E3%82%A4%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC+%E5%A5%88%E8%89%AF%E7%94%BA"}
           ]
         },
-        nextTransport:{ mode:"walk", icon:"🚶→🚐", label:"徒步 → 接駁車",
-          detail:"步行至近鐵奈良站（12分鐘）→搭接駁車上山",
-          duration:"步行12分 + 接駁10分", cost:"", modeClass:"t-mode-walk" }},
-      { time:"15:30", zh:"返回三笠旅館·泡湯", en:"Return & Onsen", lat:34.6833, lng:135.8520,
-        desc:"最後一晚好好享受溫泉放鬆", type:"hotel",
+        nextTransport:{ mode:"walk", icon:"🚶→🚐", label:"徒步北12分 → 接駁車",
+          detail:"步行至近鐵奈良站（12分鐘）→搭接駁車上山（16:00班次）",
+          duration:"步行12分 + 接駁15分", cost:"接駁免費", modeClass:"t-mode-walk" }},
+      { time:"15:30", zh:"近鐵奈良站 → 搭16:00接駁車", en:"Kintetsu Nara → Shuttle Back", lat:34.6820, lng:135.8308,
+        desc:"步行至5號出口對面三笠案內所，搭16:00接駁車回三笠旅館", type:"transport",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=Kintetsu+Nara+Station+%E8%BF%91%E9%89%84%E5%A5%88%E8%89%AF%E9%A7%85",
+        detail:{
+          addr:"近鐵奈良站 5號出口對面 三笠旅館案內所",
+          text:["從奈良町步行約12分鐘回近鐵奈良站。","前往5號出口對面三笠旅館案內所候車。","搭 16:00 班次接駁車回三笠旅館。"],
+          tips:[
+            "🚐 接駁班次：14:45 / 16:00 / 17:00 / 18:00（不需預約）",
+            "⚠️ 請在 15:45 前抵達候車點"
+          ]
+        },
+        nextTransport:{ mode:"shuttle", icon:"🚐", label:"接駁車",
+          detail:"三笠旅館接駁車 近鐵奈良站→旅館（16:00班次）",
+          duration:"接駁 15 分鐘", cost:"免費", modeClass:"t-mode-shuttle" }},
+      { time:"16:00", zh:"返回三笠旅館·泡湯", en:"Return & Onsen", lat:34.6833, lng:135.8520,
+        desc:"最後一晚好好享受溫泉放鬆。☔ 雨天在旅館泡湯尤為享受！", type:"hotel",
         mapUrl:"https://www.google.com/maps/search/?api=1&query=%E5%A5%88%E8%89%AF+%E4%B8%89%E7%AC%A0+Mikasa+Ryokan",
         detail:{
           addr:"奈良三笠日式旅館",
-          text:["搭 15:30 接駁車回旅館，享受第二晚溫泉。","晚餐同樣為萬葉會席料理（已含）。"]
+          text:["搭 16:00 接駁車回旅館，享受第二晚溫泉。☔ 雨天在旅館泡湯尤為放鬆！","晚餐同樣為萬葉會席料理（已含）。"]
         }},
       { time:"18:00", zh:"旅館懷石晚餐", en:"Kaiseki Dinner", lat:34.6833, lng:135.8520,
         desc:"第二晚懷石料理。住宿含晚餐早餐", type:"meal",
@@ -859,7 +991,7 @@ const DAYS = [
         detail:{
           addr:"KOKO HOTEL Osaka Namba Sennichimae",
           walk:"從難波站步行約 8 分鐘",
-          text:["前往 KOKO HOTEL Osaka Namba Sennichimae，先寄放行李。","15:00 後辦理入住。飯店距離日本橋站、黑門市場極近。","訂單資訊請見私人版本"]
+          text:["前往 KOKO HOTEL Osaka Namba Sennichimae，先寄放行李。","15:00 後辦理入住。飯店距離日本橋站、黑門市場極近。"]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
           detail:"從飯店沿千日前通往東→右轉進入黑門市場",
@@ -904,7 +1036,10 @@ const DAYS = [
           alts:[
             {n:"個室和牛燒肉 吟",e:"Koshitsu Wagyu Yakiniku Gin",c:"個室和牛燒肉 ｜ ¥5,000–8,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E5%80%8B%E5%AE%A4%E5%92%8C%E7%89%9B%E7%87%92%E8%82%89+%E5%90%9F+Namba+Osaka"},
             {n:"薩摩牛の藏",e:"Satsuma-gyu no Kura",c:"薩摩黑牛燒肉 ｜ ¥4,000–7,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E8%96%A9%E6%91%A9%E7%89%9B%E3%81%AE%E8%97%8F+Namba+Osaka"},
-            {n:"松坂燒肉 M 難波店",e:"Matsusaka Yakiniku M Namba",c:"松坂牛燒肉 ｜ ¥5,000–10,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E6%9D%BE%E5%9D%82%E7%87%92%E8%82%89+M+Namba+Osaka"}
+            {n:"松坂燒肉 M 難波店",e:"Matsusaka Yakiniku M Namba",c:"松坂牛燒肉 ｜ ¥5,000–10,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E6%9D%BE%E5%9D%82%E7%87%92%E8%82%89+M+Namba+Osaka"},
+            {n:"炭火焼肉 和牛苑",e:"Sumibi Yakiniku Wagyuen",c:"千日前 2-3-3，距 KOKO HOTEL 僅 2 分鐘｜炭火和牛燒肉，順路回飯店 ｜ ¥4,000–8,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E7%82%AD%E7%81%AB%E7%84%BC%E8%82%89+%E5%92%8C%E7%89%9B%E8%8B%91+%E5%8D%83%E6%97%A5%E5%89%8D+Osaka"},
+            {n:"神戶牛 和之宮 東方飯店店",e:"Kobe Beef Wanomiya (Oriental Hotel)",c:"神戶牛燒肉·頂級和牛 ｜ ¥6,000–12,000/人｜道頓堀附近步行可達",u:"https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E6%88%B8%E7%89%9B+%E5%92%8C%E4%B9%8B%E5%AE%AE+%E6%9D%B1%E6%96%B9%E9%A3%AF%E5%BA%97+Osaka"},
+            {n:"味樂館 鐵板燒 Hikari",e:"Teppanyaki Hikari (Namba)",c:"ナンバウォーク 16番出口 B1F，難波站步行 3 分鐘｜鐵板燒套餐 ｜ ¥4,000–8,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E5%91%B3%E6%A5%BD%E9%A4%A8+%E9%90%B5%E6%9D%BF%E7%87%92+Hikari+Namba+Osaka"}
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
@@ -914,14 +1049,14 @@ const DAYS = [
   },
   {
     id:5, label:"Day 5", date:"4/12 (日)", color:"#9C27B0",
-    title:"大阪自由日·壽司晶餐", titleEn:"Free Day & Sushi Farewell",
+    title:"大阪自由日·さな井懷石【已訂位】", titleEn:"Free Day & Kaiseki Farewell",
     center:[34.675,135.510], zoom:13,
     budget:[
       ["地鐵/交通","¥1,500–2,000"],
       ["午餐","¥3,000–6,000"],
-      ["晚餐","¥6,000–12,000"],
+      ["晚餐：旬鮮和楽 さな井（已訂位·3人）","¥49,800"],
       ["購物/伴手禮","¥5,000–20,000"],
-      ["小計 (3人)","¥15,500–40,000"]
+      ["小計 (3人)","¥57,300–71,800"]
     ],
     stops: [
       { time:"09:30", zh:"方案A：大阪城公園", en:"Osaka Castle Park", lat:34.6873, lng:135.5262,
@@ -974,24 +1109,29 @@ const DAYS = [
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
           detail:"回飯店休息後→傍晚步行至ときすし本店",
           duration:"步行 2 分鐘", cost:"", modeClass:"t-mode-walk" }},
-      { time:"18:00", zh:"告別壽司晶餐：ときすし", en:"Tokisushi Sushi Dinner", lat:34.6632, lng:135.5045,
-        desc:"千日前人氣壽司名店！KOKO HOTEL步行僅2分鐘。一樓吧檯＋二樓榻榻米（長輩推薦）。招牌壽司燒。¥2,000–4,000/人", type:"meal",
-        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E3%81%A8%E3%81%8D%E3%81%99%E3%81%97%E6%9C%AC%E5%BA%97+Tokisushi+%E5%8D%83%E6%97%A5%E5%89%8D+Osaka",
+      { time:"18:30", zh:"晚餐：旬鮮和楽 さな井【已訂位】", en:"Dinner: Shunsen Warakuen Sanai (Reserved)", lat:34.6720, lng:135.5055,
+        desc:"★已確認訂位！懷石三愛10道料理。¥16,800/人。18:30入座", type:"meal",
+        mapUrl:"https://www.google.com/maps/search/?api=1&query=%E6%97%AC%E9%AE%AE%E5%92%8C%E6%A5%BD+%E3%81%95%E3%81%AA%E4%BA%95+Osaka",
         detail:{
-          addr:"4-21 Sennichimae, Chuo-ku, Osaka",
-          walk:"從 KOKO HOTEL 步行 2 分鐘",
-          text:["★ 最後一晚享用日本壽司盛宴！","ときすし本店（Tokisushi Honten）——千日前區域人氣壽司名店。","從 KOKO HOTEL 步行僅 2 分鐘，同在千日前區域。","新鮮美味壽司，一樓吧檯席 + 二樓榻榻米包廂（長輩可選榻榻米席）。","招牌「壽司燒」烙燒壽司別具風味。預算約¥2,000–4,000/人"],
-          tips:["⏰ 免預約制。建議 17:30 前到店，避開 18:30–19:30 排隊高峰（週日晚尤其熱門，排隊可達 20–40 分鐘）。二樓榻榻米席較快有位。"],
-          backup:"免預約·建議 17:30 前到避開排隊",
-          alts:[
-            {n:"壽司長谷川 心齋橋本店",e:"Sushi Hasegawa Shinsaibashi",c:"懷石風壽司·15貫特選套餐 ｜ ¥5,000–8,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E5%A3%BD%E5%8F%B8%E9%95%B7%E8%B0%B7%E5%B7%9D+%E5%BF%83%E6%96%8E%E6%A9%8B+Osaka"},
-            {n:"だるま 新世界本店",e:"Daruma Kushikatsu (Shinsekai)",c:"新世界元祖串炸 ｜ ¥1,500–3,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E3%81%A0%E3%82%8B%E3%81%BE+%E6%96%B0%E4%B8%96%E7%95%8C+Daruma+Osaka"},
-            {n:"法善寺 浄理",e:"Hozenji Jori (Kappo Cuisine)",c:"割烹日本料理·懷石 ｜ ¥3,000–6,000/人",u:"https://www.google.com/maps/search/?api=1&query=%E6%B3%95%E5%96%84%E5%AF%BA+%E6%B5%84%E7%90%86+Hozenji+Osaka"}
+          addr:"大阪市中央區（心齋橋/難波周邊）",
+          walk:"從 KOKO HOTEL 步行 約 10 分鐘",
+          text:[
+            "★ 已確認訂位！",
+            "旬鮮和楽 さな井（懷石三愛）— 採用時令食材的10道精緻懷石料理。",
+            "座位：下掘式座席（掘りごたつ），禁煙，舒適寬敞。",
+            "費用：¥16,800/人（3人合計¥49,800，含積分折扣¥600）",
+            "餐廳電話：06-6214-0371"
+          ],
+          tips:[
+            "⏰ 訂位時間 18:30，請提前 10 分鐘到店確認",
+            "⚠️ 取消規定嚴格：當日/前1日取消100%，前2日取消50%。請確保準時赴約！",
+            "🍽️ 懷石三愛：前菜→煮物→刺身→燒物→揚物等10道季節料理",
+            "🌿 如有食物過敏，請訂位時或到店時告知服務人員"
           ]
         },
         nextTransport:{ mode:"walk", icon:"🚶", label:"徒步",
           detail:"步行回KOKO HOTEL，好好休息準備明日返程",
-          duration:"步行 2 分鐘", cost:"", modeClass:"t-mode-walk" }},
+          duration:"步行 10 分鐘", cost:"", modeClass:"t-mode-walk" }},
     ]
   },
   {
@@ -1068,8 +1208,9 @@ const isMobile = window.innerWidth <= 768;
 const map = L.map('map', { center:[34.666,135.503], zoom:13, zoomControl:false, attributionControl:false });
 L.control.zoom({ position:'topright' }).addTo(map);
 L.control.attribution({ position:'bottomleft', prefix:false }).addTo(map);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution:'&copy; OSM', maxZoom:19,
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+  maxZoom:19,
 }).addTo(map);
 
 function createIcon(color, idx) {
@@ -1541,12 +1682,31 @@ lc.innerHTML = DAYS.map(d=>`<div class="li"><div class="ldot" style="background:
   '<div class="li"><span class="t-mode t-mode-shuttle" style="padding:2px 6px;border-radius:3px;font-size:11px">🚐 接駁</span>' +
   '<span class="t-mode t-mode-taxi" style="padding:2px 6px;border-radius:3px;font-size:11px">🚕 計程車</span></div>' +
   '<div style="border-top:1px solid #eee;margin:8px 0"></div>' +
+  '<div class="li">☔ 雨天備案版：若草山 Day 2，東大寺 Day 3</div>' +
   '<div class="li">📍 GPS定位：點右側藍色按鈕開啟即時追蹤</div>' +
   '<div class="li">🧭 導航：點綠色按鈕跳轉Google Maps步行導航</div>' +
   '<div class="li">📖 詳情：點地圖標記或列表按鈕查看完整行程資訊</div>';
 
 document.getElementById('legendBtn').onclick = () => document.getElementById('legendOverlay').classList.add('show');
 document.getElementById('legendOverlay').onclick = e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('show'); };
+
+// Adjust layout for rain banner
+(function() {
+  const banner = document.getElementById('rainBanner');
+  const mapEl = document.getElementById('map');
+  const topbar = document.querySelector('.topbar');
+  const dayTabs = document.getElementById('dayTabs');
+  function adjustForBanner() {
+    if (banner.style.display === 'none') {
+      mapEl.style.top = '0';
+      if (topbar) topbar.style.top = '0';
+      if (dayTabs) dayTabs.style.top = '62px';
+    }
+  }
+  // Observer to adjust when banner is closed
+  const obs = new MutationObserver(adjustForBanner);
+  obs.observe(banner, { attributes: true, attributeFilter: ['style'] });
+})();
 
 // ════════════════════════════════════════
 // INIT
